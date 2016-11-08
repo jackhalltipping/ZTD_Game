@@ -4,11 +4,11 @@
 *
 * Name: NAMES of team members
 * Date: Nov 8, 2016
-* Time: 3:05:49 PM
+* Time: 3:33:41 PM
 *
 * Project: csci205_final_project
 * Package: csci205_final_project.model
-* File: Player
+* File: Mob
 * Description:
 *
 * ****************************************
@@ -21,14 +21,9 @@ import javafx.scene.image.Image;
  *
  * @author emb038
  */
-public class Player extends Mob {
-
-    public Player(double x, double y, Image image) {
+public class Mob extends Fighter {
+    public Mob(double x, double y, Image image) {
 	super(x, y, image);
-    }
-
-    public void move(int dir) {
-
     }
 
 }
