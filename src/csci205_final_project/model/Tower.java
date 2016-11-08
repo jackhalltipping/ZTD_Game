@@ -29,4 +29,12 @@ public class Tower {
         this.yCord = yCord;
     }
 
+    public int getxCord() {
+        return xCord;
+    }
+
+    public int getyCord() {
+        return yCord;
+    }
+
 }
