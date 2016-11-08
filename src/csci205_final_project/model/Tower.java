@@ -4,11 +4,11 @@
 *
 * Name: NAMES of team members
 * Date: Nov 8, 2016
-* Time: 2:52:55 PM
+* Time: 3:11:55 PM
 *
 * Project: csci205_final_project
 * Package: csci205_final_project.model
-* File: Model
+* File: Tower
 * Description:
 *
 * ****************************************
@@ -17,13 +17,8 @@ package csci205_final_project.model;
 
 /**
  *
- * @author emb038
+ * @author Jack
  */
-public class Model {
-
-    public Tower placeTower(int x, int y) {
-        Tower tower = new Tower(x, y);
-        return tower;
-    }
+public class Tower {
 
 }
