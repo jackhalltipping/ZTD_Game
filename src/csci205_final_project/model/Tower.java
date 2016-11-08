@@ -21,4 +21,12 @@ package csci205_final_project.model;
  */
 public class Tower {
 
+    int xCord;
+    int yCord;
+
+    public Tower(int xCord, int yCord) {
+        this.xCord = xCord;
+        this.yCord = yCord;
+    }
+
 }
