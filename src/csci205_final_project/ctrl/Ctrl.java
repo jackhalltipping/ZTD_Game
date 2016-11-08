@@ -17,6 +17,9 @@ package csci205_final_project.ctrl;
 
 import csci205_final_project.model.Model;
 import csci205_final_project.view.View;
+import javafx.event.EventHandler;
+import javafx.scene.input.KeyCode;
+import javafx.scene.input.KeyEvent;
 
 /**
  *
@@ -26,4 +29,28 @@ public class Ctrl {
     View theView;
     Model theModel;
 
+    public Ctrl(Model theModel, View theView) {
+	this.theModel = theModel;
+	this.theView = theView;
+    }
+
+    public void setKeyBindings() {
+	theView.getRoot().setOnKeyPressed(new EventHandler<KeyEvent>() {
+	    @Override
+	    public void handle(KeyEvent ke) {
+		if (ke.getCode().equals(KeyCode.RIGHT)) {
+		    theModel.getPlayer().move(0);
+		}
+		if (ke.getCode().equals(KeyCode.UP)) {
+		    theModel.getPlayer().move(1);
+		}
+		if (ke.getCode().equals(KeyCode.LEFT)) {
+		    theModel.getPlayer().move(2);
+		}
+		if (ke.getCode().equals(KeyCode.DOWN)) {
+		    theModel.getPlayer().move(3);
+		}
+	    }
+	});
+    }
 }
