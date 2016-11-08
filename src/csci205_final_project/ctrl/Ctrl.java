@@ -16,10 +16,14 @@
 package csci205_final_project.ctrl;
 
 import csci205_final_project.model.Model;
+import csci205_final_project.model.Tower;
 import csci205_final_project.view.View;
 import javafx.event.EventHandler;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
+import javafx.scene.input.MouseEvent;
 
 /**
  *
@@ -52,5 +56,16 @@ public class Ctrl {
 		}
 	    }
 	});
+        
+        theView.getRoot().setOnMousePressed(new EventHandler<MouseEvent>(){
+            @Override
+            public void handle(MouseEvent event) {
+                double mouseX = event.getSceneX();
+                double mouseY = event.getSceneY();
+                Tower tower = theModel.placeTower(mouseX, mouseY);
+                //ImageView imgView = new Image(tower.getImage());
+            }
+            
+        });
     }
 }

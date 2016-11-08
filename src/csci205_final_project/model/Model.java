@@ -30,4 +30,9 @@ public class Model {
 	return thePlayer;
     }
 
+    public Tower placeTower(double x, double y) {
+        Tower tower = new Tower(x, y);
+        return tower;
+    }
+
 }

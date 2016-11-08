@@ -57,6 +57,8 @@ public class View {
     public Parent getGameRoot() {
 	return gameRoot;
     }
+    
+    
 
     public void addFighter(Fighter fighter) {
 	Rectangle rect = new Rectangle();
