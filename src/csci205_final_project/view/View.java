@@ -58,7 +58,9 @@ public class View {
 	return gameRoot;
     }
     
+        
     
+    }
 
     public void addFighter(Fighter fighter) {
 	Rectangle rect = new Rectangle();

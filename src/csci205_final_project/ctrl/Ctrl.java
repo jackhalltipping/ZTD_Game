@@ -62,10 +62,20 @@ public class Ctrl {
             public void handle(MouseEvent event) {
                 double mouseX = event.getSceneX();
                 double mouseY = event.getSceneY();
-                Tower tower = theModel.placeTower(mouseX, mouseY);
+                Tower tower = theModel.placeTower(convertX(mouseX), convertY(mouseY));
                 //ImageView imgView = new Image(tower.getImage());
             }
             
         });
+    }
+    
+    public double convertX(double x) {
+        int tileSize = 50;
+        return x - (x % tileSize);
+    }
+    
+    public double convertY(double y) {
+        int tileSize = 50;
+        return y - (y % tileSize);
     }
 }

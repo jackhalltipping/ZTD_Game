@@ -34,5 +34,6 @@ public class Model {
         Tower tower = new Tower(x, y);
         return tower;
     }
+    
 
 }
