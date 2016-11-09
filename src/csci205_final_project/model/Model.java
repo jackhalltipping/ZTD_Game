@@ -31,8 +31,9 @@ public class Model {
     }
 
     public Tower placeTower(double x, double y) {
-	Tower tower = new Tower(x, y, null);
-	return tower;
+	//Tower tower = new Tower(x, y, null);
+	//return tower;
+	return null;
     }
 
 }

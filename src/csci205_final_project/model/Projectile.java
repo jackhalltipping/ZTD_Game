@@ -22,7 +22,8 @@ import javafx.scene.image.Image;
  * @author emb038
  */
 public class Projectile extends Mob {
-    public Projectile(double x, double y, double speed, Image image) {
+    public Projectile(double x, double y, double speed, Image image,
+		      Fighter createdBy) {
 	super(x, y, speed, image);
 	setSpeed(1);
     }

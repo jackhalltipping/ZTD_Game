@@ -3,12 +3,12 @@
 * Fall 2016
 *
 * Name: NAMES of team members
-* Date: Nov 8, 2016
-* Time: 3:11:55 PM
+* Date: Nov 9, 2016
+* Time: 3:47:33 PM
 *
 * Project: csci205_final_project
 * Package: csci205_final_project.model
-* File: Tower
+* File: Enemy
 * Description:
 *
 * ****************************************
@@ -19,13 +19,16 @@ import javafx.scene.image.Image;
 
 /**
  *
- * @author Jack
+ * @author emb038
  */
-public class Tower extends ViewObj {
+public class Enemy extends Mob {
+    public static double ENEMY_SPEED;
+    public static Image ENEMY_IMAGE = new Image(
+	    "file:src/csci205_final_project/view/images/enemy.png");
 
-    public Tower(double x, double y, double radius, double frrt, Image projImage,
-		 Image image) {
-	super(x, y, image);
+    public Enemy(double x, double y) {
+	super(x, y, ENEMY_SPEED, ENEMY_IMAGE);
+	setSpeed(1);
     }
 
 }
