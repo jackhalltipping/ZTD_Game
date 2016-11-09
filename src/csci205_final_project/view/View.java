@@ -15,6 +15,7 @@
  */
 package csci205_final_project.view;
 
+import csci205_final_project.model.Fighter;
 import csci205_final_project.model.Model;
 import java.io.File;
 import java.io.IOException;
@@ -22,6 +23,9 @@ import java.net.MalformedURLException;
 import java.net.URL;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
+import javafx.scene.layout.Pane;
+import javafx.scene.layout.VBox;
+import javafx.scene.shape.Rectangle;
 
 /**
  *
@@ -29,12 +33,13 @@ import javafx.scene.Parent;
  */
 public class View {
     Model theModel;
-    Parent root;
-    Parent gameRoot;
+    VBox root;
+    Pane gameRoot;
 
     public View(Model theModel) throws MalformedURLException, IOException {
 	this.theModel = theModel;
 	setRoot();
+	addFighter(theModel.getPlayer());
     }
 
     private void setRoot() throws MalformedURLException, IOException {
@@ -42,6 +47,7 @@ public class View {
 	URL url = file.toURL();
 	System.out.println(url);
 	root = FXMLLoader.load(url);
+	gameRoot = (Pane) root.lookup("#gameRoot");
     }
 
     public Parent getRoot() {
@@ -53,5 +59,14 @@ public class View {
     }
     
     
+
+    public void addFighter(Fighter fighter) {
+	Rectangle rect = new Rectangle();
+	rect.setX(50);
+	rect.setY(50);
+	rect.setWidth(200);
+	rect.setHeight(100);
+	gameRoot.getChildren().add(rect);
+    }
 
 }

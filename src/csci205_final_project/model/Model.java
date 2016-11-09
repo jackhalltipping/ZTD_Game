@@ -23,7 +23,7 @@ public class Model {
     Player thePlayer;
 
     public Model() {
-	thePlayer = new Player();
+	thePlayer = new Player(0, 0, null);
     }
 
     public Player getPlayer() {
