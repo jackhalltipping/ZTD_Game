@@ -15,6 +15,7 @@
  */
 package csci205_final_project.model;
 
+import csci205_final_project.Game;
 import java.util.ArrayList;
 import javafx.scene.image.Image;
 
@@ -54,7 +55,7 @@ public class Fighter {
 	if (timer <= 0) {
 	    Fighter target = getTarget(fighters);
 	    if (target != null) {
-		fire(target.viewObj.getX(), target.viewObj.getY());
+		fire(target);
 	    }
 	    timer = 1.0 / frrt;
 	}
@@ -77,15 +78,24 @@ public class Fighter {
 	return target;
     }
 
-    private void fire(double targetX, double targetY) {
+    private void fire(Fighter target) {
 	double dir = Math.toDegrees(Math.atan2(
-		targetX - viewObj.getX(),
-		targetY - viewObj.getY()));
-	Projectile proj = new Projectile(viewObj.getX(), viewObj.getY(),
-					 projSpeed,
-					 projImage, this);
-	viewObj.setDirection(dir);
-	proj.setDirection(dir);
+		target.viewObj.getX() - viewObj.getX(),
+		target.viewObj.getY() - viewObj.getY()));
+	if (projImage == null) {
+	    target.damage(power);
+	} else {
+	    Projectile proj = new Projectile(viewObj.getX(), viewObj.getY(),
+					     projSpeed,
+					     projImage, this);
+	    Game.theView.addViewObj(proj);
+	    proj.setDirection(-dir + 90);
+	}
+	viewObj.setDirection(-dir + 90);
+    }
+
+    public void damage(double power) {
+	health -= power;
     }
 
 }

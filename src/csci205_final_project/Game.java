@@ -18,9 +18,9 @@ import javafx.stage.Stage;
  * @author emb038
  */
 public class Game extends Application {
-    View theView;
-    Model theModel;
-    Ctrl theCtrl;
+    public static View theView;
+    public static Model theModel;
+    public static Ctrl theCtrl;
 
     public static void main(String[] args) throws IOException {
 	launch(args);

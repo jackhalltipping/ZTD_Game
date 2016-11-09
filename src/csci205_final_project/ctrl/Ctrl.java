@@ -15,10 +15,13 @@
  */
 package csci205_final_project.ctrl;
 
+import csci205_final_project.Game;
+import csci205_final_project.model.Enemy;
 import csci205_final_project.model.Fighter;
 import csci205_final_project.model.Model;
 import csci205_final_project.model.Tower;
 import csci205_final_project.model.ViewObj;
+import csci205_final_project.model.towers.Minigun;
 import csci205_final_project.view.View;
 import java.util.ArrayList;
 import javafx.animation.PauseTransition;
@@ -41,6 +44,11 @@ public class Ctrl {
     public Ctrl(Model theModel, View theView) {
 	this.theModel = theModel;
 	this.theView = theView;
+
+	Enemy enemy = new Enemy(200, 200);
+	theView.addViewObj(enemy);
+	fighters.add(enemy.fighter);
+
 	setKeyBindings();
 	start();
     }
@@ -76,13 +84,15 @@ public class Ctrl {
 	theView.getScene().setOnKeyPressed(keyEvent);
 	theView.getScene().setOnKeyReleased(keyEvent);
 
-	theView.getRoot().setOnMousePressed(new EventHandler<MouseEvent>() {
+	theView.getGameRoot().setOnMousePressed(new EventHandler<MouseEvent>() {
 	    @Override
 	    public void handle(MouseEvent event) {
 		double mouseX = event.getSceneX();
 		double mouseY = event.getSceneY();
-		Tower tower = theModel.placeTower(mouseX, mouseY);
-		//ImageView imgView = new Image(tower.getImage());
+
+		Tower tower = new Minigun(mouseX, mouseY);
+		Game.theView.addViewObj(tower);
+		Game.theCtrl.addFighter(tower.fighter);
 	    }
 
 	});

@@ -25,10 +25,17 @@ public class Enemy extends Mob {
     public static double ENEMY_SPEED;
     public static Image ENEMY_IMAGE = new Image(
 	    "file:src/csci205_final_project/view/images/enemy.png");
+    static double range;
+    static double frrt;
+    static double power;
+    static double health;
+
+    public Fighter fighter;
 
     public Enemy(double x, double y) {
 	super(x, y, ENEMY_SPEED, ENEMY_IMAGE);
-	setSpeed(1);
+	//setSpeed(1);
+	this.fighter = new Fighter(range, frrt, power, 0, null, health, 1, this);
     }
 
 }
