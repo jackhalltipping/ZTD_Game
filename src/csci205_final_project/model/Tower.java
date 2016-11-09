@@ -21,28 +21,30 @@ import javafx.scene.image.Image;
  *
  * @author Jack
  */
-public class Tower {
+public class Tower extends ViewObj {
 
-    double xCord;
-    double yCord;
+    double x;
+    double y;
     Image img;
+    double radius;
+    double frrt;
+    double timer = 0;
 
-    public Tower(double xCord, double yCord) {
-        this.xCord = xCord;
-        this.yCord = yCord;
-        this.img = new Image("https://s-media-cache-ak0.pinimg.com/originals/de/de/8a/dede8ae5755d9c7427b443b8af8a4939.png");
+    public Tower(double x, double y, double radius, double frrt, Image projImage,
+		 Image image) {
+	super(x, y, image);
+	this.radius = radius;
+	this.frrt = frrt;
     }
 
-    public double getxCord() {
-        return this.xCord;
-    }
-
-    public double getyCord() {
-        return this.yCord;
-    }
-    
-    public Image getImage() {
-        return img;
+    @Override
+    public void frame(double duration) {
+	super.frame(duration);
+	timer -= duration;
+	if (timer <= 0) {
+	    // Get target check and firing
+	    timer = 1.0 / frrt;
+	}
     }
 
 }

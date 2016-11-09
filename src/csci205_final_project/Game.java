@@ -34,10 +34,11 @@ public class Game extends Application {
 
     @Override
     public void start(Stage primaryStage) throws Exception {
-	theCtrl = new Ctrl(theModel, theView);
-
 	// Now, set up the scene, and connect it to the stage!
 	Scene scene = new Scene(theView.getRoot());
+	theView.setScene(scene);
+
+	theCtrl = new Ctrl(theModel, theView);
 
 	primaryStage.setTitle("ZTD 47");
 	primaryStage.setScene(scene);

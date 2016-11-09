@@ -17,13 +17,15 @@ package csci205_final_project.ctrl;
 
 import csci205_final_project.model.Model;
 import csci205_final_project.model.Tower;
+import csci205_final_project.model.ViewObj;
 import csci205_final_project.view.View;
+import java.util.ArrayList;
+import javafx.animation.PauseTransition;
 import javafx.event.EventHandler;
-import javafx.scene.image.Image;
-import javafx.scene.image.ImageView;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.input.MouseEvent;
+import javafx.util.Duration;
 
 /**
  *
@@ -32,40 +34,71 @@ import javafx.scene.input.MouseEvent;
 public class Ctrl {
     View theView;
     Model theModel;
+    double DT = 0.05; //Frame duration in seconds
 
     public Ctrl(Model theModel, View theView) {
 	this.theModel = theModel;
 	this.theView = theView;
+	setKeyBindings();
+	start();
     }
 
     public void setKeyBindings() {
-	theView.getRoot().setOnKeyPressed(new EventHandler<KeyEvent>() {
+	EventHandler<KeyEvent> keyEvent = (new EventHandler<KeyEvent>() {
 	    @Override
 	    public void handle(KeyEvent ke) {
-		if (ke.getCode().equals(KeyCode.RIGHT)) {
-		    theModel.getPlayer().move(0);
+		System.out.println(ke.getEventType());
+		if (ke.getEventType().equals(KeyEvent.KEY_PRESSED)) {
+		    theModel.getPlayer().setSpeed(1);
+		    if (ke.getCode().equals(KeyCode.RIGHT)) {
+			theModel.getPlayer().setDirection(0);
+		    }
+		    if (ke.getCode().equals(KeyCode.UP)) {
+			theModel.getPlayer().setDirection(270);
+		    }
+		    if (ke.getCode().equals(KeyCode.LEFT)) {
+			theModel.getPlayer().setDirection(180);
+		    }
+		    if (ke.getCode().equals(KeyCode.DOWN)) {
+			theModel.getPlayer().setDirection(90);
+		    }
+		    theModel.getPlayer().setSpeed(1);
 		}
-		if (ke.getCode().equals(KeyCode.UP)) {
-		    theModel.getPlayer().move(1);
-		}
-		if (ke.getCode().equals(KeyCode.LEFT)) {
-		    theModel.getPlayer().move(2);
-		}
-		if (ke.getCode().equals(KeyCode.DOWN)) {
-		    theModel.getPlayer().move(3);
+		if (ke.getEventType().equals(KeyEvent.KEY_RELEASED)) {
+		    theModel.getPlayer().setSpeed(0);
 		}
 	    }
+
 	});
-        
-        theView.getRoot().setOnMousePressed(new EventHandler<MouseEvent>(){
-            @Override
-            public void handle(MouseEvent event) {
-                double mouseX = event.getSceneX();
-                double mouseY = event.getSceneY();
-                Tower tower = theModel.placeTower(mouseX, mouseY);
-                //ImageView imgView = new Image(tower.getImage());
-            }
-            
-        });
+
+	theView.getScene().setOnKeyPressed(keyEvent);
+	theView.getScene().setOnKeyReleased(keyEvent);
+
+	theView.getRoot().setOnMousePressed(new EventHandler<MouseEvent>() {
+	    @Override
+	    public void handle(MouseEvent event) {
+		double mouseX = event.getSceneX();
+		double mouseY = event.getSceneY();
+		Tower tower = theModel.placeTower(mouseX, mouseY);
+		//ImageView imgView = new Image(tower.getImage());
+	    }
+
+	});
+    }
+
+    public void start() {
+	PauseTransition wait = new PauseTransition(Duration.seconds(DT));
+	wait.setOnFinished((e) -> {
+	    this.frame();
+	    wait.playFromStart();
+	});
+	wait.play();
+    }
+
+    public void frame() {
+	ArrayList<ViewObj> viewObjs = theView.getViewObjs();
+	for (ViewObj viewObj : viewObjs) {
+	    viewObj.frame(DT);
+	}
     }
 }

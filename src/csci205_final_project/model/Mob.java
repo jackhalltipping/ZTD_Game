@@ -21,9 +21,27 @@ import javafx.scene.image.Image;
  *
  * @author emb038
  */
-public class Mob extends Fighter {
-    public Mob(double x, double y, Image image) {
+public class Mob extends ViewObj {
+    double maxSpeed;
+    double speed;
+
+    public Mob(double x, double y, double maxSpeed, Image image) {
 	super(x, y, image);
+	this.speed = 0;
+	this.maxSpeed = maxSpeed;
+    }
+
+    public void setSpeed(double speed) {
+	this.speed = speed * maxSpeed;
+    }
+
+    @Override
+    public void frame(double duration) {
+	super.frame(duration);
+	double dx = duration * speed * Math.cos(getDirection() * Math.PI / 180.0);
+	double dy = duration * speed * Math.sin(getDirection() * Math.PI / 180.0);
+	getXProp().set(getX() + dx);
+	getYProp().set(getY() + dy);
     }
 
 }

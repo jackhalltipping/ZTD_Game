@@ -8,7 +8,7 @@
 *
 * Project: csci205_final_project
 * Package: csci205_final_project.model
-* File: Fighter
+* File: ViewObj
 * Description:
 *
 * ****************************************
@@ -22,13 +22,14 @@ import javafx.scene.image.Image;
  *
  * @author emb038
  */
-public class Fighter {
+public class ViewObj {
 
     SimpleDoubleProperty x;
     SimpleDoubleProperty y;
+    SimpleDoubleProperty dir = new SimpleDoubleProperty(0);
     Image image;
 
-    public Fighter(double x, double y, Image image) {
+    public ViewObj(double x, double y, Image image) {
 	this.x = new SimpleDoubleProperty(x);
 	this.y = new SimpleDoubleProperty(y);
 	this.image = image;
@@ -42,8 +43,32 @@ public class Fighter {
 	return y.getValue();
     }
 
+    public double getDirection() {
+	return dir.getValue();
+    }
+
+    public SimpleDoubleProperty getXProp() {
+	return x;
+    }
+
+    public SimpleDoubleProperty getYProp() {
+	return y;
+    }
+
+    public SimpleDoubleProperty getDirectionProp() {
+	return dir;
+    }
+
     public Image getImage() {
 	return image;
+    }
+
+    public void setDirection(double dir) {
+	this.dir.set(dir);
+    }
+
+    public void frame(double duration) {
+	//Overridden to update specific object
     }
 
 }

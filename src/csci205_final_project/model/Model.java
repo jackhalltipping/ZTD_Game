@@ -23,7 +23,7 @@ public class Model {
     Player thePlayer;
 
     public Model() {
-	thePlayer = new Player(0, 0, null);
+	thePlayer = new Player(0, 0);
     }
 
     public Player getPlayer() {
@@ -31,8 +31,8 @@ public class Model {
     }
 
     public Tower placeTower(double x, double y) {
-        Tower tower = new Tower(x, y);
-        return tower;
+	Tower tower = new Tower(x, y, null);
+	return tower;
     }
 
 }
