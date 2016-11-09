@@ -15,6 +15,7 @@
  */
 package csci205_final_project.ctrl;
 
+import csci205_final_project.model.Fighter;
 import csci205_final_project.model.Model;
 import csci205_final_project.model.Tower;
 import csci205_final_project.model.ViewObj;
@@ -35,6 +36,7 @@ public class Ctrl {
     View theView;
     Model theModel;
     double DT = 0.05; //Frame duration in seconds
+    ArrayList<Fighter> fighters = new ArrayList<Fighter>();
 
     public Ctrl(Model theModel, View theView) {
 	this.theModel = theModel;
@@ -86,6 +88,10 @@ public class Ctrl {
 	});
     }
 
+    public void addFighter(Fighter fighter) {
+	fighters.add(fighter);
+    }
+
     public void start() {
 	PauseTransition wait = new PauseTransition(Duration.seconds(DT));
 	wait.setOnFinished((e) -> {
@@ -99,6 +105,9 @@ public class Ctrl {
 	ArrayList<ViewObj> viewObjs = theView.getViewObjs();
 	for (ViewObj viewObj : viewObjs) {
 	    viewObj.frame(DT);
+	}
+	for (Fighter fighter : fighters) {
+	    fighter.update(DT, fighters);
 	}
     }
 }
