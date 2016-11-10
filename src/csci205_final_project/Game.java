@@ -39,6 +39,7 @@ public class Game extends Application {
 	theView.setScene(scene);
 
 	theCtrl = new Ctrl(theModel, theView);
+	theModel.addPlayer();
 
 	primaryStage.setTitle("ZTD 47");
 	primaryStage.setScene(scene);

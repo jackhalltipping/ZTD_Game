@@ -16,9 +16,9 @@
 package csci205_final_project.ctrl;
 
 import csci205_final_project.Game;
-import csci205_final_project.model.Enemy;
 import csci205_final_project.model.Fighter;
 import csci205_final_project.model.Model;
+import csci205_final_project.model.Projectile;
 import csci205_final_project.model.Tower;
 import csci205_final_project.model.ViewObj;
 import csci205_final_project.model.towers.Minigun;
@@ -38,16 +38,13 @@ import javafx.util.Duration;
 public class Ctrl {
     View theView;
     Model theModel;
-    double DT = 0.05; //Frame duration in seconds
+    double DT = 0.02; //Frame duration in seconds
     ArrayList<Fighter> fighters = new ArrayList<Fighter>();
+    ArrayList<Projectile> projectiles = new ArrayList<Projectile>();
 
     public Ctrl(Model theModel, View theView) {
 	this.theModel = theModel;
 	this.theView = theView;
-
-	Enemy enemy = new Enemy(200, 200);
-	theView.addViewObj(enemy);
-	fighters.add(enemy.fighter);
 
 	setKeyBindings();
 	start();
@@ -119,5 +116,20 @@ public class Ctrl {
 	for (Fighter fighter : fighters) {
 	    fighter.update(DT, fighters);
 	}
+	for (int i = 0; i < projectiles.size(); i++) {
+	    i -= projectiles.get(i).update(DT, fighters);
+	}
+    }
+
+    public void removeFighter(Fighter fighter) {
+	fighters.remove(fighter);
+    }
+
+    public void removeProjectile(Projectile projectile) {
+	projectiles.remove(projectile);
+    }
+
+    public void addProjectile(Projectile projectile) {
+	projectiles.add(projectile);
     }
 }
