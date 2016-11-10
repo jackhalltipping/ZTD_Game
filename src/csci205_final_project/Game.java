@@ -18,9 +18,9 @@ import javafx.stage.Stage;
  * @author emb038
  */
 public class Game extends Application {
-    View theView;
-    Model theModel;
-    Ctrl theCtrl;
+    public static View theView;
+    public static Model theModel;
+    public static Ctrl theCtrl;
 
     public static void main(String[] args) throws IOException {
 	launch(args);
@@ -34,10 +34,11 @@ public class Game extends Application {
 
     @Override
     public void start(Stage primaryStage) throws Exception {
-	theCtrl = new Ctrl(theModel, theView);
-
 	// Now, set up the scene, and connect it to the stage!
 	Scene scene = new Scene(theView.getRoot());
+	theView.setScene(scene);
+
+	theCtrl = new Ctrl(theModel, theView);
 
 	primaryStage.setTitle("ZTD 47");
 	primaryStage.setScene(scene);

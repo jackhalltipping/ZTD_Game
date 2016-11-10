@@ -21,28 +21,21 @@ import javafx.scene.image.Image;
  *
  * @author Jack
  */
-public class Tower {
+public class Tower extends ViewObj {
 
-    double xCord;
-    double yCord;
-    Image img;
+    public Fighter fighter;
 
-    public Tower(double xCord, double yCord) {
-        this.xCord = xCord;
-        this.yCord = yCord;
-        this.img = new Image("https://s-media-cache-ak0.pinimg.com/originals/de/de/8a/dede8ae5755d9c7427b443b8af8a4939.png");
-    }
-
-    public double getxCord() {
-        return this.xCord;
-    }
-
-    public double getyCord() {
-        return this.yCord;
+    public Tower(double x, double y, double radius, double frrt, double power,
+		 double projSpeed, double health, Image projImage,
+		 Image image) {
+	super(x, y, image);
+	this.fighter = new Fighter(radius, frrt, power, projSpeed, projImage,
+				   health, 0, this);
     }
     
-    public Image getImage() {
-        return img;
+    @Override
+    public String toString() {
+        return "Helath: " + fighter.health + "\nSpeed: " + fighter.projSpeed + "\nPower: " + fighter.power;
     }
 
 }

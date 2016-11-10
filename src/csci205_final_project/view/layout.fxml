@@ -1,11 +1,49 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ScrollPane?>
+<?import javafx.scene.control.TextArea?>
+<?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
 
-<VBox id="root" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="779.0" prefWidth="927.0" xmlns="http://javafx.com/javafx/8.0.92" xmlns:fx="http://javafx.com/fxml/1">
+<VBox id="root" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="779.0" prefWidth="927.0" xmlns="http://javafx.com/javafx/8.0.65" xmlns:fx="http://javafx.com/fxml/1">
    <children>
       <Pane id="gameRoot" prefHeight="559.0" prefWidth="927.0" />
-      <Pane id="menuRoot" prefHeight="219.0" prefWidth="927.0" />
+      <Pane id="menuRoot" prefHeight="219.0" prefWidth="927.0">
+         <children>
+            <TextField layoutY="58.0" prefHeight="29.0" prefWidth="128.0" text="Player health: ">
+               <font>
+                  <Font size="15.0" />
+               </font>
+            </TextField>
+            <TextField layoutY="88.0" prefHeight="29.0" prefWidth="103.0" text="Tower Info:">
+               <font>
+                  <Font size="15.0" />
+               </font>
+            </TextField>
+            <TextField id="playerHelath" layoutX="128.0" layoutY="58.0" prefHeight="29.0" prefWidth="115.0" />
+            <TextField prefHeight="29.0" prefWidth="128.0" text="Wave:">
+               <font>
+                  <Font size="15.0" />
+               </font>
+            </TextField>
+            <TextField layoutY="29.0" prefHeight="29.0" prefWidth="128.0" text="Money:">
+               <font>
+                  <Font size="15.0" />
+               </font>
+            </TextField>
+            <TextField id="waveNumber" layoutX="128.0" prefHeight="29.0" prefWidth="115.0">
+               <font>
+                  <Font size="15.0" />
+               </font>
+            </TextField>
+            <ScrollPane id="shopPane" layoutX="243.0" layoutY="1.0" prefHeight="219.0" prefWidth="684.0" />
+            <TextArea id="towerInfo" layoutY="117.0" prefHeight="103.0" prefWidth="245.0" />
+            <Button id="btn" layoutX="175.0" layoutY="90.0" mnemonicParsing="false" text="Button" />
+            <Label id="money" layoutX="131.0" layoutY="31.0" prefHeight="26.0" prefWidth="109.0" />
+         </children></Pane>
    </children>
 </VBox>

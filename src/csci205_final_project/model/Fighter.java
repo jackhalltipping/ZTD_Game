@@ -3,8 +3,8 @@
 * Fall 2016
 *
 * Name: NAMES of team members
-* Date: Nov 8, 2016
-* Time: 3:33:22 PM
+* Date: Nov 9, 2016
+* Time: 3:58:06 PM
 *
 * Project: csci205_final_project
 * Package: csci205_final_project.model
@@ -15,7 +15,8 @@
  */
 package csci205_final_project.model;
 
-import javafx.beans.property.SimpleDoubleProperty;
+import csci205_final_project.Game;
+import java.util.ArrayList;
 import javafx.scene.image.Image;
 
 /**
@@ -23,27 +24,78 @@ import javafx.scene.image.Image;
  * @author emb038
  */
 public class Fighter {
+    double range;
+    double frrt;
+    double power;
+    double projSpeed;
+    Image projImage;
+    double health;
+    int team;
 
-    SimpleDoubleProperty x;
-    SimpleDoubleProperty y;
-    Image image;
+    Class targetType;
+    ViewObj viewObj;
 
-    public Fighter(double x, double y, Image image) {
-	this.x = new SimpleDoubleProperty(x);
-	this.y = new SimpleDoubleProperty(y);
-	this.image = image;
+    double timer = 0;
+
+    public Fighter(double range, double frrt, double power, double projSpeed,
+		   Image projImage, double health, int team,
+		   ViewObj viewObj) {
+	this.range = range;
+	this.frrt = frrt;
+	this.power = power;
+	this.projSpeed = projSpeed;
+	this.projImage = projImage;
+	this.health = health;
+	this.viewObj = viewObj;
+	this.team = team;
     }
 
-    public double getX() {
-	return x.getValue();
+    public void update(double duration, ArrayList<Fighter> fighters) {
+	timer -= duration;
+	if (timer <= 0) {
+	    Fighter target = getTarget(fighters);
+	    if (target != null) {
+		fire(target);
+	    }
+	    timer = 1.0 / frrt;
+	}
     }
 
-    public double getY() {
-	return y.getValue();
+    public Fighter getTarget(ArrayList<Fighter> fighters) {
+	double minDistance = range;
+	Fighter target = null;
+	for (Fighter fighter : fighters) {
+	    if (fighter.team != team) {
+		double dist = Math.sqrt(Math.pow(
+			fighter.viewObj.getX() - viewObj.getX(), 2.0) + Math.pow(
+				fighter.viewObj.getY() - viewObj.getY(), 2.0));
+		if (dist <= minDistance) {
+		    minDistance = dist;
+		    target = fighter;
+		}
+	    }
+	}
+	return target;
     }
 
-    public Image getImage() {
-	return image;
+    private void fire(Fighter target) {
+	double dir = Math.toDegrees(Math.atan2(
+		target.viewObj.getX() - viewObj.getX(),
+		target.viewObj.getY() - viewObj.getY()));
+	if (projImage == null) {
+	    target.damage(power);
+	} else {
+	    Projectile proj = new Projectile(viewObj.getX(), viewObj.getY(),
+					     projSpeed,
+					     projImage, this);
+	    Game.theView.addViewObj(proj);
+	    proj.setDirection(-dir + 90);
+	}
+	viewObj.setDirection(-dir + 90);
+    }
+
+    public void damage(double power) {
+	health -= power;
     }
 
 }

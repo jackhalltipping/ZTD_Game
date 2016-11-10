@@ -3,12 +3,12 @@
 * Fall 2016
 *
 * Name: NAMES of team members
-* Date: Nov 8, 2016
-* Time: 3:05:49 PM
+* Date: Nov 9, 2016
+* Time: 3:37:45 PM
 *
 * Project: csci205_final_project
 * Package: csci205_final_project.model
-* File: Player
+* File: Projectile
 * Description:
 *
 * ****************************************
@@ -21,13 +21,11 @@ import javafx.scene.image.Image;
  *
  * @author emb038
  */
-public class Player extends Mob {
-    private static Image PLAYER_IMAGE = new Image(
-	    "file:src/csci205_final_project/view/images/player.gif");
-    private static double PLAYER_SPEED = 150;
-
-    public Player(double x, double y) {
-	super(x, y, PLAYER_SPEED, PLAYER_IMAGE);
+public class Projectile extends Mob {
+    public Projectile(double x, double y, double speed, Image image,
+		      Fighter createdBy) {
+	super(x, y, speed, image);
+	setSpeed(1);
     }
 
 }
