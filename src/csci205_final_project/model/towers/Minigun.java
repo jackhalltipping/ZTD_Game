@@ -24,9 +24,9 @@ import javafx.scene.image.Image;
  */
 public class Minigun extends Tower {
     public static double radius = 1000;
-    public static double frrt = 1;
+    public static double frrt = 5;
     public static double power;
-    public static double projSpeed = 200;
+    public static double projSpeed = 500;
     public static double health;
     public static Image projImage = new Image(
 	    "file:src/csci205_final_project/view/images/bullet.png");
