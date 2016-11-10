@@ -20,9 +20,9 @@ package csci205_final_project.model;
  * @author Matt
  */
 public enum TowerEnum {
-    MINIGUN("Minigun", 0.3, 1, 500, 200, false, "MinigunTowerImage",
+    MINIGUN("Minigun", 5, 1, 500, 200, false, "MinigunTowerImage",
             "MinigunProjectileImage"),
-    CANNON("Cannon", 0.8, 4, 250, 500, false, "CannonTowerImage",
+    CANNON("Cannon", 1, 4, 250, 500, false, "CannonTowerImage",
            "CannonProjectileImage"),
     MISSLE_LAUNCHER("Missile Launcher", 1, 1, 500, 200, true,
                     "MissileLauncherTowerImage",
