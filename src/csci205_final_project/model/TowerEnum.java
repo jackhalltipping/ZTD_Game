@@ -22,8 +22,8 @@ import javafx.scene.image.Image;
  * @author Matt
  */
 public enum TowerEnum {
-    MINIGUN("Minigun", 5, 1, 500, 800, 200, false, null,
-	    null),
+    MINIGUN("Minigun", 5, 1, 500, 800, 200, false, "minigun.png",
+	    "bullet.png"),
     CANNON("Cannon", 1, 4, 250, 1000, 500, false, null,
 	   null),
     MISSLE_LAUNCHER("Missile Launcher", 1, 1, 500, 1200, 200, true,
@@ -45,7 +45,7 @@ public enum TowerEnum {
 	String path = "file:src/csci205_final_project/view/images/";
 	this.Name = Name;
 	this.image = new Image(path + image);
-	this.projImage = new Image(path + image);
+	this.projImage = new Image(path + projImage);
 	this.frrt = frrt;
 	this.power = power;
 	this.projSpeed = projSpeed;
