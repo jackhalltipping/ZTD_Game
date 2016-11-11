@@ -38,8 +38,10 @@ public class Mob extends ViewObj {
     @Override
     public void frame(double duration) {
 	super.frame(duration);
-	double dx = duration * speed * Math.cos(getDirection() * Math.PI / 180.0);
-	double dy = duration * speed * Math.sin(getDirection() * Math.PI / 180.0);
+	double dx = duration * speed * Math.cos(
+		getMoveDirection() * Math.PI / 180.0);
+	double dy = duration * speed * Math.sin(
+		getMoveDirection() * Math.PI / 180.0);
 	getXProp().set(getX() + dx);
 	getYProp().set(getY() + dy);
     }

@@ -33,10 +33,10 @@ public enum TowerEnum {
 	  null),
     SNIPER("Sniper", 1, 1000, 1000, 10000, 100, false, null,
 	   null);
-    String Name;
-    Image image, projImage;
-    double frrt, power, projSpeed, range, health;
-    boolean tracks;
+    public String Name;
+    public Image image, projImage;
+    public double frrt, power, projSpeed, range, health;
+    public boolean tracks;
 
     private TowerEnum(String Name, double frrt,
 		      double power, double projSpeed, double range,

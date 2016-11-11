@@ -52,6 +52,10 @@ public class ViewObj {
 	return dir.getValue();
     }
 
+    public double getMoveDirection() {
+	return dir.getValue();
+    }
+
     public SimpleDoubleProperty getXProp() {
 	return x;
     }

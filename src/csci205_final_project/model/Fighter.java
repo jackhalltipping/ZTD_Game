@@ -90,7 +90,7 @@ public class Fighter {
 	return target;
     }
 
-    private void fire(Fighter target) {
+    public void fire(Fighter target) {
 	if (projImage == null) {
 	    target.takeDamage(power);
 	} else {
@@ -111,6 +111,10 @@ public class Fighter {
     public void die() {
 	Game.theView.removeViewObj(this.viewObj);
 	Game.theCtrl.removeFighter(this);
+    }
+
+    public void click() {
+	//Handles clicking of a fighter
     }
 
 }
