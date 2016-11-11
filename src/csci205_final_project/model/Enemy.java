@@ -35,7 +35,8 @@ public class Enemy extends Mob {
     public Enemy(double x, double y) {
 	super(x, y, ENEMY_SPEED, ENEMY_IMAGE);
 	setSpeed(1);
-	this.fighter = new Fighter(range, frrt, power, 0, null, health, 1, this);
+	this.fighter = new Fighter(range, frrt, power, 0, null, false, health, 1,
+				   this);
     }
 
 }

@@ -36,15 +36,17 @@ public class Fighter {
 
     double timer = 0;
     Fighter target;
+    boolean tracks;
 
     public Fighter(double range, double frrt, double power, double projSpeed,
-		   Image projImage, double health, int team,
+		   Image projImage, boolean tracks, double health, int team,
 		   ViewObj viewObj) {
 	this.range = range;
 	this.frrt = frrt;
 	this.power = power;
 	this.projSpeed = projSpeed;
 	this.projImage = projImage;
+	this.tracks = tracks;
 	this.health = health;
 	this.viewObj = viewObj;
 	this.team = team;
@@ -96,7 +98,7 @@ public class Fighter {
 	} else {
 	    Projectile proj = new Projectile(viewObj.getX(), viewObj.getY(),
 					     projSpeed, power, projImage, team,
-					     true);
+					     tracks);
 	    proj.setDirection(viewObj.getDirection());
 	}
     }

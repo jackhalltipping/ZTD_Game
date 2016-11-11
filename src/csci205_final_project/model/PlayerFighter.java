@@ -30,7 +30,7 @@ public class PlayerFighter extends Fighter {
 			 ViewObj viewObj) {
 	super(range, frrt, power,
 	      projSpeed,
-	      projImage, health, team,
+	      projImage, false, health, team,
 	      viewObj);
     }
 

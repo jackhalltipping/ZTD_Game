@@ -38,8 +38,9 @@ public class Player extends Mob {
 
     public Player(double x, double y) {
 	super(x, y, PLAYER_SPEED, PLAYER_IMAGE);
-	fighter = new Fighter(0, frrt, power, projSpeed, projImage, health, 0,
-			      this);
+	fighter = new PlayerFighter(0, frrt, power, projSpeed, projImage,
+				    health, 0,
+				    this);
     }
 
     public void frame(double duration) {

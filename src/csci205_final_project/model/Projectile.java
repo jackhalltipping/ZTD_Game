@@ -72,15 +72,16 @@ public class Projectile extends Mob {
 		return 1;
 	    }
 	    if (tracks) {
-		Math.toDegrees(Math.atan2(
+		setDirection(-Math.toDegrees(Math.atan2(
 			target.viewObj.getX() - getX(),
-			target.viewObj.getY() - getY()));
+			target.viewObj.getY() - getY())) + 90);
 	    }
 	}
 	return 0;
     }
 
     void destroy() {
+	System.out.println(tracks);
 	Game.theView.removeViewObj(this);
 	Game.theCtrl.removeProjectile(this);
     }
