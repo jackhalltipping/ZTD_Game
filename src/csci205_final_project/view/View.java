@@ -47,7 +47,6 @@ public class View {
     public View(Model theModel) throws MalformedURLException, IOException {
 	this.theModel = theModel;
 	setRoot();
-//	addViewObj(theModel.getPlayer());
         //addLabels();
         
     }
@@ -92,6 +91,8 @@ public class View {
 	sp.rotateProperty().bind(viewObj.getDirectionProp());
 	gameRoot.getChildren().add(sp);
 
+        addLabels();
+        
 	viewObjs.add(viewObj);
     }
 
@@ -100,11 +101,8 @@ public class View {
     }
     
     public void addLabels() { 
-        //Label money = (Label) menuRoot.lookup("#money");
-        //money.setText(String.valueOf(getMoney()));
-        //menuRoot.getChildren().add(money);
-        
-        ((Label) menuRoot.lookup("#money")).setText(String.valueOf(getMoney()));
+        ((Label) menuRoot.lookup("#money")).setText(String.valueOf(theModel.getMoney()));
+        ((Label) menuRoot.lookup("#wave")).setText(String.valueOf(theModel.getWave()));
     }
     
     public double getMoney() {

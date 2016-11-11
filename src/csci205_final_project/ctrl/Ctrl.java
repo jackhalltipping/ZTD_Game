@@ -157,6 +157,7 @@ public class Ctrl {
     
     public void setEvents() {
         setHandler("startWave");
+        setHandler("createTower");
     }
     
     public void setHandler(String id)  {
@@ -180,11 +181,13 @@ public class Ctrl {
 	    case "startWave":
 		Ctrl.startWave();
 		break;
+            case "createTower":
+                break;
         }
     }
     
     public static void startWave() {
-        
+        //theModel.updateWave();
     }
     
  
