@@ -15,26 +15,42 @@
  */
 package csci205_final_project.model;
 
+import javafx.scene.image.Image;
+
 /**
  *
  * @author Matt
  */
 public enum TowerEnum {
-    MINIGUN("Minigun", 5, 1, 500, 200, false, "MinigunTowerImage",
-            "MinigunProjectileImage"),
-    CANNON("Cannon", 1, 4, 250, 500, false, "CannonTowerImage",
-           "CannonProjectileImage"),
-    MISSLE_LAUNCHER("Missile Launcher", 1, 1, 500, 200, true,
-                    "MissileLauncherTowerImage",
-                    "MissileLauncherProjectileImage"),
-    LASER("Laser", 100, 3, 2000, 300, false, "LaserTowerImage",
-          "LaserProjectileImage"),
-    SNIPER("Sniper", 1, 1000, 1000, 100, false, "LaserTowerImage",
-           "LaserProjectileImage");
+    MINIGUN("Minigun", 5, 1, 500, 800, 200, false, null,
+            null),
+    CANNON("Cannon", 1, 4, 250, 1000, 500, false, null,
+           null),
+    MISSLE_LAUNCHER("Missile Launcher", 1, 1, 500, 1200, 200, true,
+                    null,
+                    null),
+    LASER("Laser", 100, 3, 2000, 500, 300, false, null,
+          null),
+    SNIPER("Sniper", 1, 1000, 1000, 10000, 100, false, null,
+           null);
+    String Name;
+    Image image, projImage;
+    double frrt, power, projSpeed, range, health;
+    boolean tracks;
 
-    TowerEnum(String Name, double frrt, double power, double projSpeed,
-              double health, boolean tracks, String image, String projImage) {
-
+    private TowerEnum(String Name, double frrt,
+                      double power, double projSpeed, double range,
+                      double health,
+                      boolean tracks, Image image, Image projImage) {
+        this.Name = Name;
+        this.image = image;
+        this.projImage = projImage;
+        this.frrt = frrt;
+        this.power = power;
+        this.projSpeed = projSpeed;
+        this.range = range;
+        this.health = health;
+        this.tracks = tracks;
     }
 
 }
