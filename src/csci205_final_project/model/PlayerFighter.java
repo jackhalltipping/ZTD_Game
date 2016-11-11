@@ -39,6 +39,11 @@ public class PlayerFighter extends Fighter {
 	//Avoid previous update method
     }
 
+    @Override
+    public void die() {
+	//Lose game
+    }
+
     public void click() {
 	//Handles clicking of a fighter
     }
