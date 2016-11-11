@@ -15,8 +15,6 @@
  */
 package csci205_final_project.model;
 
-import javafx.scene.image.Image;
-
 /**
  *
  * @author Jack
@@ -25,12 +23,12 @@ public class Tower extends ViewObj {
 
     public Fighter fighter;
 
-    public Tower(double x, double y, double range, double frrt, double power,
-		 double projSpeed, double health, Image projImage,
-		 Image image) {
-	super(x, y, image);
-	this.fighter = new Fighter(range, frrt, power, projSpeed, projImage,
-				   health, 0, this);
+    public Tower(double x, double y, TowerEnum towerType) {
+	super(x, y, towerType.image);
+	this.fighter = new Fighter(towerType.range, towerType.frrt,
+				   towerType.power, towerType.projSpeed,
+				   towerType.projImage,
+				   towerType.health, 0, this);
     }
 
 }
