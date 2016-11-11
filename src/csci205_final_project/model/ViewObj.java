@@ -15,8 +15,10 @@
  */
 package csci205_final_project.model;
 
+import csci205_final_project.Game;
 import javafx.beans.property.SimpleDoubleProperty;
 import javafx.scene.image.Image;
+import javafx.scene.layout.StackPane;
 
 /**
  *
@@ -28,11 +30,14 @@ public class ViewObj {
     SimpleDoubleProperty y;
     SimpleDoubleProperty dir = new SimpleDoubleProperty(0);
     Image image;
+    StackPane sp;
 
     public ViewObj(double x, double y, Image image) {
 	this.x = new SimpleDoubleProperty(x);
 	this.y = new SimpleDoubleProperty(y);
 	this.image = image;
+
+	Game.theView.addViewObj(this);
     }
 
     public double getX() {
@@ -71,5 +76,13 @@ public class ViewObj {
 	//Overridden to update specific object
     }
     
+
+    public StackPane getSp() {
+	return sp;
+    }
+
+    public void setSp(StackPane sp) {
+	this.sp = sp;
+    }
 
 }

@@ -32,10 +32,10 @@ public class Fighter {
     double health;
     int team;
 
-    Class targetType;
     ViewObj viewObj;
 
     double timer = 0;
+    Fighter target;
 
     public Fighter(double range, double frrt, double power, double projSpeed,
 		   Image projImage, double health, int team,
@@ -48,12 +48,21 @@ public class Fighter {
 	this.health = health;
 	this.viewObj = viewObj;
 	this.team = team;
+
+	Game.theCtrl.addFighter(this);
     }
 
     public void update(double duration, ArrayList<Fighter> fighters) {
 	timer -= duration;
+	Fighter target = getTarget(fighters);
+	if (target != null) {
+	    double dir = Math.toDegrees(Math.atan2(
+		    target.viewObj.getX() - viewObj.getX(),
+		    target.viewObj.getY() - viewObj.getY()));
+	    viewObj.setDirection(-dir + 90);
+	}
+
 	if (timer <= 0) {
-	    Fighter target = getTarget(fighters);
 	    if (target != null) {
 		fire(target);
 	    }
@@ -62,8 +71,11 @@ public class Fighter {
     }
 
     public Fighter getTarget(ArrayList<Fighter> fighters) {
+	if (viewObj instanceof Enemy) {
+	    return Game.theModel.getPlayer().fighter;
+	}
 	double minDistance = range;
-	Fighter target = null;
+	target = null;
 	for (Fighter fighter : fighters) {
 	    if (fighter.team != team) {
 		double dist = Math.sqrt(Math.pow(
@@ -79,23 +91,26 @@ public class Fighter {
     }
 
     private void fire(Fighter target) {
-	double dir = Math.toDegrees(Math.atan2(
-		target.viewObj.getX() - viewObj.getX(),
-		target.viewObj.getY() - viewObj.getY()));
 	if (projImage == null) {
-	    target.damage(power);
+	    target.takeDamage(power);
 	} else {
 	    Projectile proj = new Projectile(viewObj.getX(), viewObj.getY(),
-					     projSpeed,
-					     projImage, this);
-	    Game.theView.addViewObj(proj);
-	    proj.setDirection(-dir + 90);
+					     projSpeed, power, projImage, team,
+					     true);
+	    proj.setDirection(viewObj.getDirection());
 	}
-	viewObj.setDirection(-dir + 90);
     }
 
-    public void damage(double power) {
+    public void takeDamage(double power) {
 	health -= power;
+	if (health <= 0) {
+	    die();
+	}
+    }
+
+    public void die() {
+	Game.theView.removeViewObj(this.viewObj);
+	Game.theCtrl.removeFighter(this);
     }
 
 }

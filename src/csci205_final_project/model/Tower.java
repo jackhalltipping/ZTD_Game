@@ -25,11 +25,11 @@ public class Tower extends ViewObj {
 
     public Fighter fighter;
 
-    public Tower(double x, double y, double radius, double frrt, double power,
+    public Tower(double x, double y, double range, double frrt, double power,
 		 double projSpeed, double health, Image projImage,
 		 Image image) {
 	super(x, y, image);
-	this.fighter = new Fighter(radius, frrt, power, projSpeed, projImage,
+	this.fighter = new Fighter(range, frrt, power, projSpeed, projImage,
 				   health, 0, this);
     }
     

@@ -47,7 +47,7 @@ public class View {
     public View(Model theModel) throws MalformedURLException, IOException {
 	this.theModel = theModel;
 	setRoot();
-	addViewObj(theModel.getPlayer());
+//	addViewObj(theModel.getPlayer());
         //addLabels();
         
     }
@@ -84,6 +84,7 @@ public class View {
 
     public void addViewObj(ViewObj viewObj) {
 	StackPane sp = new StackPane();
+	viewObj.setSp(sp);
 	ImageView imgView = new ImageView(viewObj.getImage());
 	sp.getChildren().add(imgView);
 	sp.layoutXProperty().bind(viewObj.getXProp());
@@ -108,6 +109,12 @@ public class View {
     
     public double getMoney() {
         return 1000.00;
+    }
+
+    public void removeViewObj(ViewObj viewObj) {
+	//viewObj.getSp().getChildren().clear();
+	gameRoot.getChildren().remove(viewObj.getSp());
+	viewObjs.remove(viewObj);
     }
 
 }

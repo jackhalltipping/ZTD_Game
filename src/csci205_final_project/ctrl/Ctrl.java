@@ -19,12 +19,14 @@ import csci205_final_project.Game;
 import csci205_final_project.model.Enemy;
 import csci205_final_project.model.Fighter;
 import csci205_final_project.model.Model;
+import csci205_final_project.model.Projectile;
 import csci205_final_project.model.Tower;
 import csci205_final_project.model.ViewObj;
 import csci205_final_project.model.towers.Minigun;
 import csci205_final_project.view.View;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Random;
 import javafx.animation.PauseTransition;
 import javafx.event.EventHandler;
 import javafx.scene.control.Label;
@@ -38,18 +40,18 @@ import javafx.util.Duration;
  * @author emb038
  */
 public class Ctrl {
+    Random random = new Random();
+
     View theView;
     Model theModel;
-    double DT = 0.05; //Frame duration in seconds
+    double DT = 0.02; //Frame duration in seconds
+    double ZPS = 0.5; //average zombies per second
     ArrayList<Fighter> fighters = new ArrayList<Fighter>();
+    ArrayList<Projectile> projectiles = new ArrayList<Projectile>();
 
     public Ctrl(Model theModel, View theView) {
 	this.theModel = theModel;
 	this.theView = theView;
-
-	Enemy enemy = new Enemy(200, 200);
-	theView.addViewObj(enemy);
-	fighters.add(enemy.fighter);
 
 	setKeyBindings();
 	start();
@@ -122,6 +124,25 @@ public class Ctrl {
 	for (Fighter fighter : fighters) {
 	    fighter.update(DT, fighters);
 	}
+	for (int i = 0; i < projectiles.size(); i++) {
+	    i -= projectiles.get(i).update(DT, fighters);
+	}
+	if (random.nextDouble() <= DT * ZPS) {
+	    new Enemy(300, 300);
+	}
+	ZPS += 0; //adaptive difficulty
+    }
+
+    public void removeFighter(Fighter fighter) {
+	fighters.remove(fighter);
+    }
+
+    public void removeProjectile(Projectile projectile) {
+	projectiles.remove(projectile);
+    }
+
+    public void addProjectile(Projectile projectile) {
+	projectiles.add(projectile);
     }
     
     public double convertX(double x) {
@@ -135,7 +156,7 @@ public class Ctrl {
     }
     
     public void setEvents() {
-        setHandler("btn");
+        setHandler("startWave");
     }
     
     public void setHandler(String id)  {
@@ -156,7 +177,7 @@ public class Ctrl {
     public static void handle(String id) throws IOException, ClassNotFoundException {
 	System.out.println("Handling: " + id + " click");
 	switch (id) {
-	    case "btn":
+	    case "startWave":
 		Ctrl.startWave();
 		break;
         }

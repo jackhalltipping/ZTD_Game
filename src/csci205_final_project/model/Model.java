@@ -21,9 +21,15 @@ package csci205_final_project.model;
  */
 public class Model {
     Player thePlayer;
+    
 
     public Model() {
+
+    }
+
+    public void addPlayer() {
 	thePlayer = new Player(0, 0);
+	new Enemy(200, 200);
     }
 
     public Player getPlayer() {
