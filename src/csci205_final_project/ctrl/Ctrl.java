@@ -157,12 +157,12 @@ public class Ctrl {
 	System.out.println("Handling: " + id + " click");
 	switch (id) {
 	    case "btn":
-		Ctrl.btnHandle();
+		Ctrl.startWave();
 		break;
         }
     }
     
-    public static void btnHandle() {
+    public static void startWave() {
         
     }
     

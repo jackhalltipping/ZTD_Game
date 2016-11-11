@@ -42,7 +42,7 @@
             </TextField>
             <ScrollPane id="shopPane" layoutX="243.0" layoutY="1.0" prefHeight="219.0" prefWidth="684.0" />
             <TextArea id="towerInfo" layoutY="117.0" prefHeight="103.0" prefWidth="245.0" />
-            <Button id="btn" layoutX="175.0" layoutY="90.0" mnemonicParsing="false" text="Button" />
+            <Button id="btn" layoutX="141.0" layoutY="90.0" mnemonicParsing="false" text="Start wave" />
             <Label id="money" layoutX="131.0" layoutY="31.0" prefHeight="26.0" prefWidth="109.0" />
          </children></Pane>
    </children>
