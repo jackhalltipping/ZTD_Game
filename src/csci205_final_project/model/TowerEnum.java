@@ -22,7 +22,7 @@ import javafx.scene.image.Image;
  * @author Matt
  */
 public enum TowerEnum {
-    MINIGUN("Minigun", 5, 1, 500, 800, 200, true, "minigun.png",
+    MINIGUN("Minigun", 5, 1, 500, 800, 200, false, "minigun.png",
 	    "bullet.png"),
     CANNON("Cannon", 1, 4, 250, 1000, 500, false, null,
 	   null),

@@ -27,7 +27,7 @@ public class Tower extends ViewObj {
 	super(x, y, towerType.image);
 	this.fighter = new Fighter(towerType.range, towerType.frrt,
 				   towerType.power, towerType.projSpeed,
-				   towerType.projImage, true,
+				   towerType.projImage, towerType.tracks,
 				   towerType.health, 0, this);
     }
 
