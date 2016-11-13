@@ -48,29 +48,7 @@ public class gameNoise {
     public void play() {
         this.mediaPlayer = new MediaPlayer(sound);
         mediaPlayer.play();
-//        noiseTask playNoise = new noiseTask();
-//        Thread playThread = new Thread(playNoise);
-//        playThread.setDaemon(true);
-//        playThread.start();
+
     }
-//
-//    class noiseTask extends Task {
-//        @Override
-//        protected Object call() throws Exception {
-//
-//            Platform.runLater(new Runnable() {
-//                @Override
-//                public void run() {
-//
-//                    mediaPlayer.seek(Duration.ZERO);
-//                    mediaPlayer.play();
-//                }
-//            });
-//
-//            Thread.sleep(1);
-//            return mediaPlayer;
-//       }
-//
-//}
 
 }
