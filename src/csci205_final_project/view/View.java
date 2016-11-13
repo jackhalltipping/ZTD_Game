@@ -16,6 +16,7 @@
 package csci205_final_project.view;
 
 import csci205_final_project.model.Model;
+import csci205_final_project.model.TowerEnum;
 import csci205_final_project.model.ViewObj;
 import java.io.File;
 import java.io.IOException;
@@ -42,55 +43,68 @@ public class View {
     ArrayList<ViewObj> viewObjs = new ArrayList<ViewObj>();
 
     public View(Model theModel) throws MalformedURLException, IOException {
-	this.theModel = theModel;
-	setRoot();
+        this.theModel = theModel;
+        setRoot();
     }
 
     private void setRoot() throws MalformedURLException, IOException {
-	File file = new File("src/csci205_final_project/view/layout.fxml");
-	URL url = file.toURL();
-	System.out.println(url);
-	root = FXMLLoader.load(url);
-	gameRoot = (Pane) root.lookup("#gameRoot");
+        File file = new File("src/csci205_final_project/view/layout.fxml");
+        URL url = file.toURL();
+        System.out.println(url);
+        root = FXMLLoader.load(url);
+        gameRoot = (Pane) root.lookup("#gameRoot");
     }
 
     public Parent getRoot() {
-	return root;
+        return root;
     }
 
     public Parent getGameRoot() {
-	return gameRoot;
+        return gameRoot;
     }
 
     public Scene getScene() {
-	return scene;
+        return scene;
     }
 
     public void setScene(Scene scene) {
-	this.scene = scene;
+        this.scene = scene;
+    }
+
+    public void addTower(TowerEnum tower, double x, double y) {
+        StackPane sp = new StackPane();
+
+        ImageView imgView = new ImageView(tower.getImage());
+        sp.getChildren().add(imgView);
+        sp.layoutXProperty().set(x);
+        sp.layoutYProperty().set(y);
+        sp.rotateProperty().bind(imgView.rotateProperty());
+        gameRoot.getChildren().add(sp);
+
+        //viewObjs.add(tower);
     }
 
     public void addViewObj(ViewObj viewObj) {
-	StackPane sp = new StackPane();
-	viewObj.setSp(sp);
-	ImageView imgView = new ImageView(viewObj.getImage());
-	sp.getChildren().add(imgView);
-	sp.layoutXProperty().bind(viewObj.getXProp());
-	sp.layoutYProperty().bind(viewObj.getYProp());
-	sp.rotateProperty().bind(viewObj.getDirectionProp());
-	gameRoot.getChildren().add(sp);
+        StackPane sp = new StackPane();
+        viewObj.setSp(sp);
+        ImageView imgView = new ImageView(viewObj.getImage());
+        sp.getChildren().add(imgView);
+        sp.layoutXProperty().bind(viewObj.getXProp());
+        sp.layoutYProperty().bind(viewObj.getYProp());
+        sp.rotateProperty().bind(viewObj.getDirectionProp());
+        gameRoot.getChildren().add(sp);
 
-	viewObjs.add(viewObj);
+        viewObjs.add(viewObj);
     }
 
     public ArrayList<ViewObj> getViewObjs() {
-	return viewObjs;
+        return viewObjs;
     }
 
     public void removeViewObj(ViewObj viewObj) {
-	//viewObj.getSp().getChildren().clear();
-	gameRoot.getChildren().remove(viewObj.getSp());
-	viewObjs.remove(viewObj);
+        //viewObj.getSp().getChildren().clear();
+        gameRoot.getChildren().remove(viewObj.getSp());
+        viewObjs.remove(viewObj);
     }
 
 }

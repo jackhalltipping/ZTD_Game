@@ -37,6 +37,8 @@ public enum TowerEnum {
     Image image, projImage;
     double frrt, power, projSpeed, range, health;
     boolean tracks;
+    Fighter fighter;
+    ViewObj viewObj;
 
     private TowerEnum(String Name, double frrt,
                       double power, double projSpeed, double range,
@@ -51,6 +53,18 @@ public enum TowerEnum {
         this.range = range;
         this.health = health;
         this.tracks = tracks;
+    }
+
+    public void setX() {
+
+    }
+
+    public void setFighter(Fighter fighter) {
+        this.fighter = fighter;
+    }
+
+    public Image getImage() {
+        return image;
     }
 
 }
