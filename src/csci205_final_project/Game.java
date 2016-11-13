@@ -40,11 +40,6 @@ public class Game extends Application {
         Scene scene = new Scene(theView.getRoot());
         theView.setScene(scene);
 
-//        String musicFile = "resources/AllIWantForChristmas.mp3";
-//
-//        Media sound = new Media(new File(musicFile).toURI().toString());
-//        MediaPlayer mediaPlayer = new MediaPlayer(sound);
-//        mediaPlayer.play();
         theCtrl = new Ctrl(theModel, theView);
         theModel.addPlayer();
 
