@@ -18,7 +18,6 @@ package csci205_final_project.ctrl;
 import java.io.File;
 import javafx.scene.media.Media;
 import javafx.scene.media.MediaPlayer;
-import javafx.util.Duration;
 
 /**
  *
@@ -28,6 +27,7 @@ public class gameNoise {
 
     String musicFileName = "resources/AllIWantForChristmas.mp3";
     MediaPlayer mediaPlayer;
+    Media sound;
 
     public gameNoise() {
         this.musicFileName = "resources/AllIWantForChristmas.mp3";
@@ -37,13 +37,40 @@ public class gameNoise {
 
     public gameNoise(String musicFileName) {
         this.musicFileName = "resources\\" + musicFileName;
-        Media sound = new Media(new File(this.musicFileName).toURI().toString());
-        this.mediaPlayer = new MediaPlayer(sound);
+        sound = new Media(new File(this.musicFileName).toURI().toString());
+
     }
 
+    /**
+     * plays sound also creates media player so that there is never cut off from
+     * starting a new sound
+     */
     public void play() {
-        mediaPlayer.seek(Duration.ZERO);
+        this.mediaPlayer = new MediaPlayer(sound);
         mediaPlayer.play();
+//        noiseTask playNoise = new noiseTask();
+//        Thread playThread = new Thread(playNoise);
+//        playThread.setDaemon(true);
+//        playThread.start();
     }
+//
+//    class noiseTask extends Task {
+//        @Override
+//        protected Object call() throws Exception {
+//
+//            Platform.runLater(new Runnable() {
+//                @Override
+//                public void run() {
+//
+//                    mediaPlayer.seek(Duration.ZERO);
+//                    mediaPlayer.play();
+//                }
+//            });
+//
+//            Thread.sleep(1);
+//            return mediaPlayer;
+//       }
+//
+//}
 
 }

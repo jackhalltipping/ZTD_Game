@@ -103,8 +103,7 @@ public class Fighter {
         if (projImage == null) {
             target.takeDamage(power);
         } else {
-            this.firingNoise.play();
-
+            firingNoise.play();
             Projectile proj = new Projectile(viewObj.getX(), viewObj.getY(),
                                              projSpeed, power, projImage, team,
                                              true);
