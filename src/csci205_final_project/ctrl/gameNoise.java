@@ -26,13 +26,13 @@ import javafx.scene.media.MediaPlayer;
 public class gameNoise {
 
     String musicFileName = "resources/AllIWantForChristmas.mp3";
-    MediaPlayer mediaPlayer;
     Media sound;
+    private static int mediaPlayerCount = 0;
+    private static final int MAX_MEDIAPLAYERS = 30;
 
     public gameNoise() {
         this.musicFileName = "resources/AllIWantForChristmas.mp3";
         Media sound = new Media(new File(musicFileName).toURI().toString());
-        this.mediaPlayer = new MediaPlayer(sound);
     }
 
     public gameNoise(String musicFileName) {
@@ -46,8 +46,13 @@ public class gameNoise {
      * starting a new sound
      */
     public void play() {
-        this.mediaPlayer = new MediaPlayer(sound);
-        mediaPlayer.play();
+        mediaPlayerCount++;
+        if (mediaPlayerCount <= MAX_MEDIAPLAYERS) {
+            MediaPlayer mediaPlayer = new MediaPlayer(sound);
+            mediaPlayer.play();
+
+        }
+        mediaPlayerCount--;
 
     }
 
