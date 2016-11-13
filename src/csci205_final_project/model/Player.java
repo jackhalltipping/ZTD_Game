@@ -24,7 +24,7 @@ import javafx.scene.image.Image;
  */
 public class Player extends Mob {
     private static Image PLAYER_IMAGE = new Image(
-	    "file:src/csci205_final_project/view/images/player.gif");
+	    "file:src/csci205_final_project/view/images/player.png");
     private static double PLAYER_SPEED = 350;
     double frrt = 2;
     double power = 1;
