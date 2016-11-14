@@ -26,6 +26,7 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Label;
+import javafx.scene.control.ProgressBar;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.StackPane;
@@ -45,74 +46,82 @@ public class View {
     ArrayList<ViewObj> viewObjs = new ArrayList<ViewObj>();
 
     public View(Model theModel) throws MalformedURLException, IOException {
-	this.theModel = theModel;
-	setRoot();
-        //addLabels();
-        
+        this.theModel = theModel;
+        setRoot();
+
     }
 
     private void setRoot() throws MalformedURLException, IOException {
-	File file = new File("src/csci205_final_project/view/layout.fxml");
-	URL url = file.toURL();
-	System.out.println(url);
-	root = FXMLLoader.load(url);
-	gameRoot = (Pane) root.lookup("#gameRoot");
+        File file = new File("src/csci205_final_project/view/layout.fxml");
+        URL url = file.toURL();
+        System.out.println(url);
+        root = FXMLLoader.load(url);
+        gameRoot = (Pane) root.lookup("#gameRoot");
         menuRoot = (Pane) root.lookup("#menuRoot");
         //shopRoot = (Pane) root.lookup("#shopPane");
     }
 
     public Parent getRoot() {
-	return root;
+        return root;
     }
 
     public Parent getGameRoot() {
-	return gameRoot;
+        return gameRoot;
     }
-    
+
     public Parent getMenuRoot() {
         return menuRoot;
     }
-    
+
     public Scene getScene() {
-	return scene;
+        return scene;
     }
 
     public void setScene(Scene scene) {
-	this.scene = scene;
+        this.scene = scene;
     }
 
     public void addViewObj(ViewObj viewObj) {
-	StackPane sp = new StackPane();
-	viewObj.setSp(sp);
-	ImageView imgView = new ImageView(viewObj.getImage());
-	sp.getChildren().add(imgView);
-	sp.layoutXProperty().bind(viewObj.getXProp());
-	sp.layoutYProperty().bind(viewObj.getYProp());
-	sp.rotateProperty().bind(viewObj.getDirectionProp());
-	gameRoot.getChildren().add(sp);
+        StackPane sp = new StackPane();
+        viewObj.setSp(sp);
+        ImageView imgView = new ImageView(viewObj.getImage());
+        sp.getChildren().add(imgView);
+        sp.layoutXProperty().bind(viewObj.getXProp());
+        sp.layoutYProperty().bind(viewObj.getYProp());
+        sp.rotateProperty().bind(viewObj.getDirectionProp());
+        gameRoot.getChildren().add(sp);
 
         addLabels();
-        
-	viewObjs.add(viewObj);
+
+        viewObjs.add(viewObj);
     }
 
     public ArrayList<ViewObj> getViewObjs() {
-	return viewObjs;
+        return viewObjs;
     }
-    
-    public void addLabels() { 
-        ((Label) menuRoot.lookup("#money")).setText(String.valueOf(theModel.getMoney()));
-        ((Label) menuRoot.lookup("#wave")).setText(String.valueOf(theModel.getWave()));
+
+    public void addLabels() {
+        ((Label) menuRoot.lookup("#money")).setText(String.valueOf(
+                theModel.getMoney()));
+        ((Label) menuRoot.lookup("#wave")).setText(String.valueOf(
+                theModel.getWave()));
     }
-    
+
+    public void addHealth() {
+        double health = this.theModel.getPlayer().getHealth() / 100.0;
+        float f = (float) health;
+        System.out.println(f);
+        ((ProgressBar) menuRoot.lookup("#playerHealth")).setProgress(f);
+    }
+
     public double getMoney() {
         return 1000.00;
     }
 
     public void removeViewObj(ViewObj viewObj) {
-	//viewObj.getSp().getChildren().clear();
-	gameRoot.getChildren().remove(viewObj.getSp());
-	viewObjs.remove(viewObj);
+        //viewObj.getSp().getChildren().clear();
+        gameRoot.getChildren().remove(viewObj.getSp());
+        viewObjs.remove(viewObj);
     }
 
 }

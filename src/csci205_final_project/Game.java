@@ -23,28 +23,28 @@ public class Game extends Application {
     public static Ctrl theCtrl;
 
     public static void main(String[] args) throws IOException {
-	launch(args);
+        launch(args);
     }
 
     @Override
     public void init() throws IOException {
-	theModel = new Model();
-	theView = new View(theModel);
+        theModel = new Model();
+        theView = new View(theModel);
     }
 
     @Override
     public void start(Stage primaryStage) throws Exception {
-	// Now, set up the scene, and connect it to the stage!
-	Scene scene = new Scene(theView.getRoot());
-	theView.setScene(scene);
+        // Now, set up the scene, and connect it to the stage!
+        Scene scene = new Scene(theView.getRoot());
+        theView.setScene(scene);
 
-	theCtrl = new Ctrl(theModel, theView);
-	theModel.addPlayer();
+        theCtrl = new Ctrl(theModel, theView);
+        theModel.addPlayer();
 
-	primaryStage.setTitle("ZTD 47");
-	primaryStage.setScene(scene);
-	primaryStage.sizeToScene();
-	primaryStage.show();
+        primaryStage.setTitle("ZTD 47");
+        primaryStage.setScene(scene);
+        primaryStage.sizeToScene();
+        primaryStage.show();
     }
 
 }

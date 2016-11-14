@@ -23,7 +23,7 @@ import javafx.scene.image.Image;
  */
 public class Player extends Mob {
     private static Image PLAYER_IMAGE = new Image(
-	    "file:src/csci205_final_project/view/images/player.gif");
+            "file:src/csci205_final_project/view/images/player.gif");
     private static double PLAYER_SPEED = 350;
     double frrt = 2;
     double power = 1;
@@ -34,9 +34,13 @@ public class Player extends Mob {
     Fighter fighter; // #firefighter
 
     public Player(double x, double y) {
-	super(x, y, PLAYER_SPEED, PLAYER_IMAGE);
-	fighter = new Fighter(0, frrt, power, projSpeed, projImage, health, 0,
-			      this);
+        super(x, y, PLAYER_SPEED, PLAYER_IMAGE);
+        fighter = new Fighter(0, frrt, power, projSpeed, projImage, health, 0,
+                              this);
+    }
+
+    public double getHealth() {
+        return health;
     }
 
 }
