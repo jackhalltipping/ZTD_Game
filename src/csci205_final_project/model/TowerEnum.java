@@ -54,4 +54,8 @@ public enum TowerEnum {
 	this.tracks = tracks;
     }
 
+    public Image getImage() {
+	return image;
+    }
+
 }

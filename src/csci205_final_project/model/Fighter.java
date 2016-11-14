@@ -1,3 +1,5 @@
+package csci205_final_project.model;
+
 /* *****************************************
 * CSCI205 - Software Engineering and Design
 * Fall 2016
@@ -13,9 +15,8 @@
 *
 * ****************************************
  */
-package csci205_final_project.model;
-
 import csci205_final_project.Game;
+import csci205_final_project.ctrl.GameNoise;
 import java.util.ArrayList;
 import javafx.scene.image.Image;
 
@@ -31,6 +32,8 @@ public class Fighter {
     Image projImage;
     double health;
     int team;
+
+    GameNoise firingNoise;
 
     ViewObj viewObj;
 
@@ -50,6 +53,7 @@ public class Fighter {
 	this.health = health;
 	this.viewObj = viewObj;
 	this.team = team;
+	this.firingNoise = new GameNoise("regularShot.mp3");
 
 	Game.theCtrl.addFighter(this);
     }
@@ -96,6 +100,7 @@ public class Fighter {
 	if (projImage == null) {
 	    target.takeDamage(power);
 	} else {
+	    firingNoise.play();
 	    Projectile proj = new Projectile(viewObj.getX(), viewObj.getY(),
 					     projSpeed, power, projImage, team,
 					     tracks);
