@@ -28,7 +28,7 @@ public class Enemy extends Mob {
     static double range;
     static double frrt;
     static double power;
-    static double health = 100;
+    static double health = 5;
 
     public Fighter fighter;
 

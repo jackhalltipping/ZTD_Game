@@ -101,7 +101,10 @@ public class Fighter {
 	    target.takeDamage(power);
 	} else {
 	    firingNoise.play();
-	    Projectile proj = new Projectile(viewObj.getX(), viewObj.getY(),
+	    Projectile proj = new Projectile(viewObj.getX() + 32 * Math.cos(
+		    viewObj.getDirection() * Math.PI / 180),
+					     viewObj.getY() + 32 * Math.sin(
+						     viewObj.getDirection() * Math.PI / 180),
 					     projSpeed, power, projImage, team,
 					     tracks);
 	    proj.setDirection(viewObj.getDirection());
