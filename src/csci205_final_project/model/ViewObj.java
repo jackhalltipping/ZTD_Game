@@ -38,6 +38,7 @@ public class ViewObj {
 	this.image = image;
 
 	Game.theView.addViewObj(this);
+	Game.theView.getMenuRoot().toFront();
     }
 
     public double getX() {
@@ -79,7 +80,6 @@ public class ViewObj {
     public void frame(double duration) {
 	//Overridden to update specific object
     }
-    
 
     public StackPane getSp() {
 	return sp;

@@ -15,7 +15,9 @@
  */
 package csci205_final_project.model;
 
+import csci205_final_project.Game;
 import java.util.ArrayList;
+import javafx.beans.property.SimpleDoubleProperty;
 import javafx.scene.image.Image;
 
 /**
@@ -24,6 +26,8 @@ import javafx.scene.image.Image;
  */
 public class PlayerFighter extends Fighter {
 
+    private SimpleDoubleProperty playerHealth = new SimpleDoubleProperty(0);
+
     public PlayerFighter(double range, double frrt, double power,
 			 double projSpeed,
 			 Image projImage, double health, int team,
@@ -31,7 +35,8 @@ public class PlayerFighter extends Fighter {
 	super(range, frrt, power,
 	      projSpeed,
 	      projImage, false, health, team,
-	      viewObj);
+	      viewObj, 0);
+	playerHealth.set(health);
     }
 
     @Override
@@ -40,12 +45,22 @@ public class PlayerFighter extends Fighter {
     }
 
     @Override
+    public void takeDamage(double power) {
+	super.takeDamage(power);
+	playerHealth.set(health / 100.0);
+    }
+
+    @Override
     public void die() {
-	//Lose game
+	Game.gameOver();
     }
 
     public void click() {
 	//Handles clicking of a fighter
+    }
+
+    public SimpleDoubleProperty getPlayerHealthProperty() {
+	return playerHealth;
     }
 
 }

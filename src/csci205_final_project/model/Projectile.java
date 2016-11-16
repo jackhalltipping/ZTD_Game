@@ -81,7 +81,6 @@ public class Projectile extends Mob {
     }
 
     void destroy() {
-	System.out.println(tracks);
 	Game.theView.removeViewObj(this);
 	Game.theCtrl.removeProjectile(this);
     }

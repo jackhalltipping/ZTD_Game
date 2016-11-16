@@ -41,9 +41,11 @@ public class Fighter {
     Fighter target;
     boolean tracks;
 
+    double reward;
+
     public Fighter(double range, double frrt, double power, double projSpeed,
 		   Image projImage, boolean tracks, double health, int team,
-		   ViewObj viewObj) {
+		   ViewObj viewObj, double reward) {
 	this.range = range;
 	this.frrt = frrt;
 	this.power = power;
@@ -53,6 +55,7 @@ public class Fighter {
 	this.health = health;
 	this.viewObj = viewObj;
 	this.team = team;
+	this.reward = reward;
 	this.firingNoise = new GameNoise("regularShot.mp3");
 
 	Game.theCtrl.addFighter(this);
@@ -121,6 +124,7 @@ public class Fighter {
     public void die() {
 	Game.theView.removeViewObj(this.viewObj);
 	Game.theCtrl.removeFighter(this);
+	Game.theModel.addMoney(reward);
     }
 
     public void click() {

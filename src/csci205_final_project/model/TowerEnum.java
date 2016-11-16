@@ -22,26 +22,29 @@ import javafx.scene.image.Image;
  * @author Matt
  */
 public enum TowerEnum {
-    MINIGUN("Minigun", 5, 1, 500, 800, 200, false, "minigun.png",
-	    "bullet.png"),
-    CANNON("Cannon", 1, 4, 250, 1000, 500, false, "cannon.png",
-	   "cannonball.png"),
-    MISSLE_LAUNCHER("Missile Launcher", 1, 1, 500, 1200, 200, true,
+    MINIGUN("Minigun", 10, 1, 500, 800, 200, false, "minigun.png",
+	    "bullet.png", 20),
+    CANNON("Cannon", 1, 10, 250, 1000, 500, false, "cannon.png",
+	   "cannonball.png", 10),
+    MISSLE_LAUNCHER("Missile Launcher", 1, 5, 500, 1200, 200, true,
 		    "launcher.png",
-		    "missile.png"),
-    LASER("Laser", 100, 3, 2000, 500, 300, false, "lasergun.png",
-	  "laser.png"),
-    SNIPER("Sniper", 1, 1000, 1000, 10000, 100, false, null,
-	   null);
+		    "missile.png", 25),
+    LASER("Laser", 100, 0.5, 1500, 500, 300, false, "lasergun.png",
+	  "laser.png", 100)/*,
+    SNIPER("Sniper", 1, 100, 1000, 10000, 100, false, null,
+	   null,15)*/;
     public String Name;
+
     public Image image, projImage;
     public double frrt, power, projSpeed, range, health;
     public boolean tracks;
+    public double price;
 
     private TowerEnum(String Name, double frrt,
 		      double power, double projSpeed, double range,
 		      double health,
-		      boolean tracks, String image, String projImage) {
+		      boolean tracks, String image, String projImage,
+		      double price) {
 	String path = "file:src/csci205_final_project/view/images/";
 	this.Name = Name;
 	this.image = new Image(path + image);
@@ -52,6 +55,7 @@ public enum TowerEnum {
 	this.range = range;
 	this.health = health;
 	this.tracks = tracks;
+	this.price = price;
     }
 
     public Image getImage() {

@@ -21,6 +21,7 @@ public class Game extends Application {
     public static View theView;
     public static Model theModel;
     public static Ctrl theCtrl;
+    public static Stage primaryStage;
 
     public static void main(String[] args) throws IOException {
 	launch(args);
@@ -43,10 +44,19 @@ public class Game extends Application {
 	theCtrl = new Ctrl(theModel, theView);
 	theModel.addPlayer();
 
+	this.primaryStage = primaryStage;
+
 	primaryStage.setTitle("ZTD 47");
 	primaryStage.setScene(scene);
 	primaryStage.sizeToScene();
 	primaryStage.show();
+	theView.initTowerButtons();
+	theView.setViewBindings();
+    }
+
+    public static void gameOver() {
+	primaryStage.close();
+	System.out.println("Game Over");
     }
 
 }
