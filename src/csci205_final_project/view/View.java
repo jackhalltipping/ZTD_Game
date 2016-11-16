@@ -27,6 +27,7 @@ import javafx.beans.property.SimpleDoubleProperty;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.Label;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.StackPane;
@@ -41,6 +42,8 @@ public class View {
     Model theModel;
     VBox root;
     Pane gameRoot;
+    Pane menuRoot;
+    Pane shopRoot;
     ArrayList<ViewObj> viewObjs = new ArrayList<ViewObj>();
     TowerEnum tempTowerType;
     StackPane tempTower;
@@ -63,6 +66,8 @@ public class View {
 	System.out.println(url);
 	root = FXMLLoader.load(url);
 	gameRoot = (Pane) root.lookup("#gameRoot");
+        menuRoot = (Pane) root.lookup("#menuRoot");
+        //shopRoot = (Pane) root.lookup("#shopPane");
     }
 
     public Parent getRoot() {
@@ -72,7 +77,11 @@ public class View {
     public Parent getGameRoot() {
 	return gameRoot;
     }
-
+    
+    public Parent getMenuRoot() {
+        return menuRoot;
+    }
+    
     public Scene getScene() {
 	return scene;
     }
@@ -91,11 +100,22 @@ public class View {
 	sp.rotateProperty().bind(viewObj.getDirectionProp());
 	gameRoot.getChildren().add(sp);
 
+        addLabels();
+        
 	viewObjs.add(viewObj);
     }
 
     public ArrayList<ViewObj> getViewObjs() {
 	return viewObjs;
+    }
+    
+    public void addLabels() { 
+        ((Label) menuRoot.lookup("#money")).setText(String.valueOf(theModel.getMoney()));
+        ((Label) menuRoot.lookup("#wave")).setText(String.valueOf(theModel.getWave()));
+    }
+    
+    public double getMoney() {
+        return 1000.00;
     }
 
     public void removeViewObj(ViewObj viewObj) {

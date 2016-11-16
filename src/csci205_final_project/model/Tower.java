@@ -30,5 +30,10 @@ public class Tower extends ViewObj {
 				   towerType.projImage, towerType.tracks,
 				   towerType.health, 0, this);
     }
+    
+    @Override
+    public String toString() {
+        return "Helath: " + fighter.health + "\nSpeed: " + fighter.projSpeed + "\nPower: " + fighter.power;
+    }
 
 }

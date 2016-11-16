@@ -21,9 +21,12 @@ package csci205_final_project.model;
  */
 public class Model {
     Player thePlayer;
+    double money;
+    int wave;
 
     public Model() {
-
+        this.money = 1000.00;
+        this.wave = 0;
     }
 
     public void addPlayer() {
@@ -34,5 +37,17 @@ public class Model {
     public Player getPlayer() {
 	return thePlayer;
     }
-
+    
+    public double getMoney() {
+        return money;
+    }
+    
+    public double getWave() {
+        return wave;
+    }
+    
+    public void updateWave() {
+        wave += 1;
+    }
+    
 }

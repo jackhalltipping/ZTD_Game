@@ -79,6 +79,7 @@ public class ViewObj {
     public void frame(double duration) {
 	//Overridden to update specific object
     }
+    
 
     public StackPane getSp() {
 	return sp;
