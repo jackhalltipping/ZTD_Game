@@ -1,3 +1,5 @@
+package csci205_final_project.model;
+
 /* *****************************************
 * CSCI205 - Software Engineering and Design
 * Fall 2016
@@ -13,9 +15,8 @@
 *
 * ****************************************
  */
-package csci205_final_project.model;
-
 import csci205_final_project.Game;
+import csci205_final_project.ctrl.GameNoise;
 import java.util.ArrayList;
 import javafx.scene.image.Image;
 
@@ -32,22 +33,27 @@ public class Fighter {
     double health;
     int team;
 
+    GameNoise firingNoise;
+
     ViewObj viewObj;
 
     double timer = 0;
     Fighter target;
+    boolean tracks;
 
     public Fighter(double range, double frrt, double power, double projSpeed,
-		   Image projImage, double health, int team,
+		   Image projImage, boolean tracks, double health, int team,
 		   ViewObj viewObj) {
 	this.range = range;
 	this.frrt = frrt;
 	this.power = power;
 	this.projSpeed = projSpeed;
 	this.projImage = projImage;
+	this.tracks = tracks;
 	this.health = health;
 	this.viewObj = viewObj;
 	this.team = team;
+	this.firingNoise = new GameNoise("regularShot.mp3");
 
 	Game.theCtrl.addFighter(this);
     }
@@ -90,13 +96,17 @@ public class Fighter {
 	return target;
     }
 
-    private void fire(Fighter target) {
+    public void fire(Fighter target) {
 	if (projImage == null) {
 	    target.takeDamage(power);
 	} else {
-	    Projectile proj = new Projectile(viewObj.getX(), viewObj.getY(),
+	    firingNoise.play();
+	    Projectile proj = new Projectile(viewObj.getX() + 32 * Math.cos(
+		    viewObj.getDirection() * Math.PI / 180),
+					     viewObj.getY() + 32 * Math.sin(
+						     viewObj.getDirection() * Math.PI / 180),
 					     projSpeed, power, projImage, team,
-					     true);
+					     tracks);
 	    proj.setDirection(viewObj.getDirection());
 	}
     }
@@ -111,6 +121,10 @@ public class Fighter {
     public void die() {
 	Game.theView.removeViewObj(this.viewObj);
 	Game.theCtrl.removeFighter(this);
+    }
+
+    public void click() {
+	//Handles clicking of a fighter
     }
 
 }

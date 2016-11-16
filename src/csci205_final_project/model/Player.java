@@ -15,6 +15,7 @@
  */
 package csci205_final_project.model;
 
+import csci205_final_project.Game;
 import javafx.scene.image.Image;
 
 /**
@@ -23,24 +24,43 @@ import javafx.scene.image.Image;
  */
 public class Player extends Mob {
     private static Image PLAYER_IMAGE = new Image(
-            "file:src/csci205_final_project/view/images/player.gif");
+	    "file:src/csci205_final_project/view/images/player.png");
     private static double PLAYER_SPEED = 350;
     double frrt = 2;
     double power = 1;
-    Image projImage;
-    double projSpeed;
+    Image projImage = new Image(
+	    "file:src/csci205_final_project/view/images/bullet.png");
+    double projSpeed = 750;
     double health = 100;
 
-    Fighter fighter; // #firefighter
+    double moveDirection;
+    public Fighter fighter; // #firefighter
 
     public Player(double x, double y) {
-        super(x, y, PLAYER_SPEED, PLAYER_IMAGE);
-        fighter = new Fighter(0, frrt, power, projSpeed, projImage, health, 0,
-                              this);
+	super(x, y, PLAYER_SPEED, PLAYER_IMAGE);
+	fighter = new PlayerFighter(0, frrt, power, projSpeed, projImage,
+				    health, 0,
+				    this);
     }
 
+    public void frame(double duration) {
+	super.frame(duration);
+	double dir = Math.toDegrees(Math.atan2(
+		Game.theView.getMouseX() - getX(),
+		Game.theView.getMouseY() - getY()));
+	setDirection(-dir + 90);
+    }
+
+    public void setMoveDirection(double dir) {
+	moveDirection = dir;
+    }
+
+    @Override
+    public double getMoveDirection() {
+	return moveDirection; //This is so image points in the right direction
+    }
+    
     public double getHealth() {
-        return health;
+        return this.health;
     }
-
 }

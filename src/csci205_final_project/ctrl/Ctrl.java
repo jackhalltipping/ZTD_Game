@@ -15,23 +15,25 @@
  */
 package csci205_final_project.ctrl;
 
-import csci205_final_project.Game;
 import csci205_final_project.model.Enemy;
 import csci205_final_project.model.Fighter;
 import csci205_final_project.model.Model;
 import csci205_final_project.model.Projectile;
 import csci205_final_project.model.Tower;
+import csci205_final_project.model.TowerEnum;
 import csci205_final_project.model.ViewObj;
-import csci205_final_project.model.towers.Minigun;
 import csci205_final_project.view.View;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Random;
 import javafx.animation.PauseTransition;
+import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
+import javafx.scene.control.Button;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.input.MouseEvent;
+import javafx.scene.layout.Pane;
 import javafx.util.Duration;
 
 /**
@@ -43,8 +45,9 @@ public class Ctrl {
 
     View theView;
     Model theModel;
+    static boolean inWave;
     double DT = 0.02; //Frame duration in seconds
-    double ZPS = 0.5; //average zombies per second
+    double ZPS = 2; //average zombies per second
     ArrayList<Fighter> fighters = new ArrayList<Fighter>();
     ArrayList<Projectile> projectiles = new ArrayList<Projectile>();
 
@@ -54,6 +57,7 @@ public class Ctrl {
 
         setKeyBindings();
         start();
+        setWaveButtonAction();
     }
 
     public void setKeyBindings() {
@@ -62,20 +66,35 @@ public class Ctrl {
             public void handle(KeyEvent ke) {
                 System.out.println(ke.getEventType());
                 if (ke.getEventType().equals(KeyEvent.KEY_PRESSED)) {
-                    theModel.getPlayer().setSpeed(1);
                     if (ke.getCode().equals(KeyCode.RIGHT)) {
-                        theModel.getPlayer().setDirection(0);
+                        theModel.getPlayer().setMoveDirection(0);
+                        theModel.getPlayer().setSpeed(1);
                     }
                     if (ke.getCode().equals(KeyCode.UP)) {
-                        theModel.getPlayer().setDirection(270);
+                        theModel.getPlayer().setMoveDirection(270);
+                        theModel.getPlayer().setSpeed(1);
                     }
                     if (ke.getCode().equals(KeyCode.LEFT)) {
-                        theModel.getPlayer().setDirection(180);
+                        theModel.getPlayer().setMoveDirection(180);
+                        theModel.getPlayer().setSpeed(1);
                     }
                     if (ke.getCode().equals(KeyCode.DOWN)) {
-                        theModel.getPlayer().setDirection(90);
+                        theModel.getPlayer().setMoveDirection(90);
+                        theModel.getPlayer().setSpeed(1);
                     }
-                    theModel.getPlayer().setSpeed(1);
+                    if (ke.getCode().equals(KeyCode.M)) {
+                        theView.setTempTower(TowerEnum.MINIGUN);
+                    }
+                    if (ke.getCode().equals(KeyCode.L)) {
+                        theView.setTempTower(TowerEnum.LASER);
+                    }
+                    if (ke.getCode().equals(KeyCode.C)) {
+                        theView.setTempTower(TowerEnum.CANNON);
+                    }
+                    if (ke.getCode().equals(KeyCode.A)) {
+                        theView.setTempTower(TowerEnum.MISSLE_LAUNCHER);
+                    }
+
                 }
                 if (ke.getEventType().equals(KeyEvent.KEY_RELEASED)) {
                     theModel.getPlayer().setSpeed(0);
@@ -93,9 +112,19 @@ public class Ctrl {
                 double mouseX = event.getSceneX();
                 double mouseY = event.getSceneY();
 
-                Tower tower = new Minigun(mouseX, mouseY);
-                Game.theView.addViewObj(tower);
-                Game.theCtrl.addFighter(tower.fighter);
+                if (theView.getTempTower() != null) {
+                    new Tower(mouseX, mouseY, theView.getTempTower());
+                    theView.setTempTower(null);
+                } else {
+                    theModel.getPlayer().fighter.fire(null);
+                }
+            }
+
+        });
+        theView.getGameRoot().setOnMouseMoved(new EventHandler<MouseEvent>() {
+            @Override
+            public void handle(MouseEvent event) {
+                theView.setMouse(event.getSceneX(), event.getSceneY());
             }
 
         });
@@ -125,11 +154,12 @@ public class Ctrl {
         for (int i = 0; i < projectiles.size(); i++) {
             i -= projectiles.get(i).update(DT, fighters);
         }
-        if (random.nextDouble() <= DT * ZPS) {
-            new Enemy(300, 300);
+        if (random.nextDouble() <= DT * ZPS && inWave) {
+            new Enemy(
+                    random.nextDouble() * ((Pane) theView.getGameRoot()).getWidth(),
+                    random.nextDouble() * ((Pane) theView.getGameRoot()).getHeight());
         }
         ZPS += 0; //adaptive difficulty
-        this.theView.addHealth();
     }
 
     public void removeFighter(Fighter fighter) {
@@ -186,7 +216,21 @@ public class Ctrl {
     }
 
     public static void startWave() {
-        //theModel.updateWave();
+        //should be inWave=true
+        inWave = !inWave;
+        //other stuff
+    }
+
+    private void setWaveButtonAction() {
+        Button waveButton = ((Button) theView.getMenuRoot().lookup("#startWave"));
+        waveButton.addEventHandler(ActionEvent.ACTION,
+                                   new EventHandler<ActionEvent>() {
+                               @Override
+                               public void handle(ActionEvent event) {
+                                   startWave();
+                               }
+
+                           });
     }
 
 }

@@ -16,12 +16,14 @@
 package csci205_final_project.view;
 
 import csci205_final_project.model.Model;
+import csci205_final_project.model.TowerEnum;
 import csci205_final_project.model.ViewObj;
 import java.io.File;
 import java.io.IOException;
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.ArrayList;
+import javafx.beans.property.SimpleDoubleProperty;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
@@ -44,11 +46,19 @@ public class View {
     Pane menuRoot;
     Pane shopRoot;
     ArrayList<ViewObj> viewObjs = new ArrayList<ViewObj>();
+    TowerEnum tempTowerType;
+    StackPane tempTower;
+
+    SimpleDoubleProperty mouseX = new SimpleDoubleProperty(0);
+    SimpleDoubleProperty mouseY = new SimpleDoubleProperty(0);
 
     public View(Model theModel) throws MalformedURLException, IOException {
-        this.theModel = theModel;
-        setRoot();
-
+	this.theModel = theModel;
+	setRoot();
+	tempTower = new StackPane();
+	tempTower.layoutXProperty().bind(mouseX);
+	tempTower.layoutYProperty().bind(mouseY);
+	gameRoot.getChildren().add(tempTower);
     }
 
     private void setRoot() throws MalformedURLException, IOException {
@@ -108,7 +118,7 @@ public class View {
     }
 
     public void addHealth() {
-        double health = this.theModel.getPlayer().getHealth() / 100.0;
+        double health = this.theModel.getPlayer().getHealth() / 700.0;
         float f = (float) health;
         System.out.println(f);
         ((ProgressBar) menuRoot.lookup("#playerHealth")).setProgress(f);
@@ -122,6 +132,31 @@ public class View {
         //viewObj.getSp().getChildren().clear();
         gameRoot.getChildren().remove(viewObj.getSp());
         viewObjs.remove(viewObj);
+    }
+
+    public TowerEnum getTempTower() {
+	return tempTowerType;
+    }
+
+    public void setTempTower(TowerEnum tempTowerType) {
+	this.tempTowerType = tempTowerType;
+	tempTower.getChildren().clear();
+	if (tempTowerType != null) {
+	    tempTower.getChildren().add(new ImageView(tempTowerType.image));
+	}
+    }
+
+    public void setMouse(double x, double y) {
+	mouseX.set(x);
+	mouseY.set(y);
+    }
+
+    public double getMouseX() {
+	return mouseX.getValue();
+    }
+
+    public double getMouseY() {
+	return mouseY.getValue();
     }
 
 }
