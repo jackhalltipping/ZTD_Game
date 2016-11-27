@@ -24,19 +24,33 @@ import javafx.scene.image.Image;
 public class Enemy extends Mob {
     public static double ENEMY_SPEED = 250;
     public static Image ENEMY_IMAGE = new Image(
-	    "file:src/csci205_final_project/view/images/zombie.png");
+            "file:src/csci205_final_project/view/images/zombie.png");
+
     static double range = 32;
     static double frrt = 0.5;
     static double power = 1;
     static double health = 10;
+    static double reward;
+
+    public static double getHealth() {
+        return health;
+    }
+
+    public static void setHealth(int health) {
+        Enemy.health = health;
+    }
 
     public Fighter fighter;
 
     public Enemy(double x, double y) {
-	super(x, y, ENEMY_SPEED, ENEMY_IMAGE);
-	setSpeed(1);
-	this.fighter = new Fighter(range, frrt, power, 0, null, false, health, 1,
-				   this, 2);
+        super(x, y, ENEMY_SPEED, ENEMY_IMAGE);
+        setSpeed(1);
+        this.fighter = new Fighter(range, frrt, power, 0, null, false, health, 1,
+                                   this, reward);
+    }
+
+    public static void setReward(double reward) {
+        Enemy.reward = reward;
     }
 
 }
