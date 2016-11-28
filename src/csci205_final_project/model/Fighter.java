@@ -100,7 +100,9 @@ public class Fighter {
     }
 
     public void fire(Fighter target) {
-	if (projImage == null) {
+	if (projImage == null && Math.hypot(
+		viewObj.getX() - target.viewObj.getX(),
+		viewObj.getY() - target.viewObj.getY()) <= range) {
 	    target.takeDamage(power);
 	} else {
 	    firingNoise.play();
