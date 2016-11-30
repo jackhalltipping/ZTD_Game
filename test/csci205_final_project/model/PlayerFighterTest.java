@@ -15,6 +15,7 @@
  */
 package csci205_final_project.model;
 
+import static java.lang.System.getProperty;
 import javafx.scene.image.Image;
 import org.junit.After;
 import static org.junit.Assert.assertEquals;
@@ -46,6 +47,10 @@ public class PlayerFighterTest {
         System.out.println("takeDamage");
         double frrt = 2;
         double power = 1;
+        System.out.println("Current working directory: " + getProperty(
+                "user.dir"));
+        System.out.println(
+                "Image trying to access: csci205_final_project/src/csci205_final_project/view/images/bullet.png");
         Image projImage = new Image(
                 "file:src/csci205_final_project/view/images/bullet.png");
         double projSpeed = 750;
