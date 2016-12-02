@@ -24,12 +24,12 @@ import javafx.scene.image.Image;
 public enum TowerEnum {
     MINIGUN("Minigun", 10, 1, 500, 800, 200, false, "minigun.png",
 	    "bullet.png", 20,"regularShot.mp3"),
-    CANNON("Cannon", 1, 10, 250, 1000, 500, false, "cannon.png",
+    CANNON("Cannon", 1, 20, 250, 1500, 500, false, "cannon.png",
 	   "cannonball.png", 10,"regularShot.mp3"),
-    MISSLE_LAUNCHER("Missile Launcher", 1, 5, 500, 1200, 200, true,
+    MISSLE_LAUNCHER("Missile Launcher", 1, 10, 750, 1200, 200, true,
 		    "launcher.png",
 		    "missile.png", 25,"regularShot.mp3"),
-    LASER("Laser", 100, 0.5, 1500, 300, 300, false, "lasergun.png",
+    LASER("Laser", 100, 0.5, 1500, 200, 300, false, "lasergun.png",
 	  "laser.png", 100,null)/*,
     SNIPER("Sniper", 1, 100, 1000, 10000, 100, false, null,
 	   null,15)*/;

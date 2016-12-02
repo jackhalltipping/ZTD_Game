@@ -172,6 +172,7 @@ public class View {
 		theModel.getPlayer().fighter.getPlayerHealthProperty());
 	((Label) root.lookup("#money")).textProperty().bind(
 		theModel.getMoneyProperty().asString());
+        ((Label)menuRoot.lookup("#highwave")).textProperty().bind(theModel.getHighWave().asString());
     }
 
 }

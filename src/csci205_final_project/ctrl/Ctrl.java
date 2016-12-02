@@ -172,19 +172,19 @@ public class Ctrl {
             new Enemy(
                     random.nextDouble() * ((Pane) theView.getGameRoot()).getWidth(),
                     random.nextDouble() * ((Pane) theView.getGameRoot()).getHeight());
-            Enemy.setReward((int) (0.5 * theModel.getWave()) + 2);
+            Enemy.setReward((int) (0.1* theModel.getWave()+0.5));
         }
     }
 
     private void endWave() {
         theModel.updateWave();
         inWave = false;
-        theModel.addMoney(theModel.getWave() * 25 + 50);
+        theModel.addMoney(theModel.getWave() * 10 + 25);
         zombiesPerWave = (int) (Math.sqrt(theModel.getWave() ^ (3)) + 10 * theModel.getWave());
         ZPS += 1 / 2;
 
         Enemy.setHealth(
-                (int) (Enemy.getHealth() + Math.sqrt(theModel.getWave()) * 1.5)
+                (int) (Enemy.getHealth() + Math.sqrt(theModel.getWave()) * 2)
         );
     }
 

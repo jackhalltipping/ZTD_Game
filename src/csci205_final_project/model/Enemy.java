@@ -27,7 +27,7 @@ public class Enemy extends Mob {
             "file:src/csci205_final_project/view/images/zombie.png");
 
     static double range = 32;
-    static double frrt = 0.5;
+    static double frrt = 3;
     static double power = 1;
     static double health = 10;
     static double reward;
