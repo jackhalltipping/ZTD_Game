@@ -15,39 +15,48 @@
  */
 package csci205_final_project.model;
 
+import javafx.beans.property.SimpleDoubleProperty;
+
 /**
  *
  * @author emb038
  */
 public class Model {
     Player thePlayer;
-    double money;
+    SimpleDoubleProperty money;
     int wave;
 
     public Model() {
-        this.money = 1000.00;
-        this.wave = 0;
+	this.money = new SimpleDoubleProperty(100);
+	this.wave = 0;
     }
 
     public void addPlayer() {
 	thePlayer = new Player(0, 0);
-	new Enemy(200, 200);
     }
 
     public Player getPlayer() {
 	return thePlayer;
     }
-    
+
     public double getMoney() {
-        return money;
+	return money.get();
     }
-    
+
+    public SimpleDoubleProperty getMoneyProperty() {
+	return money;
+    }
+
     public double getWave() {
-        return wave;
+	return wave;
     }
-    
+
     public void updateWave() {
-        wave += 1;
+	wave += 1;
     }
-    
+
+    public void addMoney(double deposit) {
+	money.set(getMoney() + deposit);
+    }
+
 }

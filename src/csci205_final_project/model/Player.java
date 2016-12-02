@@ -34,7 +34,7 @@ public class Player extends Mob {
     double health = 100;
 
     double moveDirection;
-    public Fighter fighter; // #firefighter
+    public PlayerFighter fighter; // #firefighter
 
     public Player(double x, double y) {
 	super(x, y, PLAYER_SPEED, PLAYER_IMAGE);

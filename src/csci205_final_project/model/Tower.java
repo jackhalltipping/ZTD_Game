@@ -28,12 +28,12 @@ public class Tower extends ViewObj {
 	this.fighter = new Fighter(towerType.range, towerType.frrt,
 				   towerType.power, towerType.projSpeed,
 				   towerType.projImage, towerType.tracks,
-				   towerType.health, 0, this);
+				   towerType.health, 0, this, 0);
     }
-    
+
     @Override
     public String toString() {
-        return "Helath: " + fighter.health + "\nSpeed: " + fighter.projSpeed + "\nPower: " + fighter.power;
+	return "Helath: " + fighter.health + "\nSpeed: " + fighter.projSpeed + "\nPower: " + fighter.power;
     }
 
 }

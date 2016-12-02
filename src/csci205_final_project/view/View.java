@@ -15,6 +15,7 @@
  */
 package csci205_final_project.view;
 
+import csci205_final_project.Game;
 import csci205_final_project.model.Model;
 import csci205_final_project.model.TowerEnum;
 import csci205_final_project.model.ViewObj;
@@ -24,12 +25,16 @@ import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.ArrayList;
 import javafx.beans.property.SimpleDoubleProperty;
+import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.ProgressBar;
 import javafx.scene.image.ImageView;
+import javafx.scene.layout.HBox;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
@@ -62,13 +67,14 @@ public class View {
     }
 
     private void setRoot() throws MalformedURLException, IOException {
-        File file = new File("src/csci205_final_project/view/layout.fxml");
-        URL url = file.toURL();
-        System.out.println(url);
-        root = FXMLLoader.load(url);
-        gameRoot = (Pane) root.lookup("#gameRoot");
-        menuRoot = (Pane) root.lookup("#menuRoot");
-        //shopRoot = (Pane) root.lookup("#shopPane");
+
+	File file = new File("src/csci205_final_project/view/layout.fxml");
+	URL url = file.toURL();
+	System.out.println(url);
+	root = FXMLLoader.load(url);
+	gameRoot = (Pane) root.lookup("#gameRoot");
+	menuRoot = (Pane) root.lookup("#menuRoot");
+	//shopRoot = (Pane) root.lookup("#shopPane");
     }
 
     public Parent getRoot() {
@@ -80,7 +86,7 @@ public class View {
     }
 
     public Parent getMenuRoot() {
-        return menuRoot;
+	return menuRoot;
     }
 
     public Scene getScene() {
@@ -101,9 +107,11 @@ public class View {
         sp.rotateProperty().bind(viewObj.getDirectionProp());
         gameRoot.getChildren().add(sp);
 
-        addLabels();
 
-        viewObjs.add(viewObj);
+	addLabels();
+
+	viewObjs.add(viewObj);
+
     }
 
     public ArrayList<ViewObj> getViewObjs() {
@@ -111,21 +119,14 @@ public class View {
     }
 
     public void addLabels() {
-        ((Label) menuRoot.lookup("#money")).setText(String.valueOf(
-                theModel.getMoney()));
-        ((Label) menuRoot.lookup("#wave")).setText(String.valueOf(
-                theModel.getWave()));
+	((Label) menuRoot.lookup("#wave")).setText(String.valueOf(
+		theModel.getWave()));
+
     }
 
-    public void addHealth() {
-        double health = this.theModel.getPlayer().getHealth() / 700.0;
-        float f = (float) health;
-        System.out.println(f);
-        ((ProgressBar) menuRoot.lookup("#playerHealth")).setProgress(f);
-    }
 
     public double getMoney() {
-        return 1000.00;
+	return 1000.00;
     }
 
     public void removeViewObj(ViewObj viewObj) {
@@ -157,6 +158,36 @@ public class View {
 
     public double getMouseY() {
 	return mouseY.getValue();
+    }
+
+    public void initTowerButtons() {
+	for (TowerEnum towerType : TowerEnum.values()) {
+	    Button newButton = new Button(towerType.Name, new ImageView(
+					  towerType.image));
+	    newButton.setOnAction(new CreateTowerHandler(towerType));
+	    ((HBox) root.lookup("#towerButtons")).getChildren().add(newButton);
+	}
+    }
+
+    public void setViewBindings() {
+	((ProgressBar) root.lookup("#playerHealth")).progressProperty().bind(
+		theModel.getPlayer().fighter.getPlayerHealthProperty());
+	((Label) root.lookup("#money")).textProperty().bind(
+		theModel.getMoneyProperty().asString());
+    }
+
+}
+
+class CreateTowerHandler implements EventHandler<ActionEvent> {
+    TowerEnum towerType;
+
+    public CreateTowerHandler(TowerEnum towerType) {
+	this.towerType = towerType;
+    }
+
+    @Override
+    public void handle(ActionEvent event) {
+	Game.theView.setTempTower(towerType);
     }
 
 }
