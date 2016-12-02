@@ -27,19 +27,23 @@ import javafx.scene.media.MediaPlayer;
 public class GameNoise {
 
     String musicFileName = "resources/AllIWantForChristmas.mp3";
-    Media sound;
+    //Media sound;
     private static int mediaPlayerCount = 0;
     private static final int MAX_MEDIAPLAYERS = 30;
     boolean firstPass= true;
 
     public GameNoise() {
 	this.musicFileName = "resources/AllIWantForChristmas.mp3";
-	sound = new Media(new File(musicFileName).toURI().toString());
+	//sound = new Media(new File(musicFileName).toURI().toString());
     }
 
     public GameNoise(String musicFileName) {
+        if(musicFileName==null){
+            this.musicFileName=null;
+            return;
+        }
 	this.musicFileName = "resources/" + musicFileName;
-	sound = new Media(new File(this.musicFileName).toURI().toString());
+	//sound = new Media(new File(this.musicFileName).toURI().toString());
 
 
     }
@@ -51,6 +55,9 @@ public class GameNoise {
      * starting a new sound
      */
     public void play() {
+        if(this.musicFileName==null){
+            return;
+        }
      
         if(firstPass){
             firstPass=false;
@@ -59,20 +66,18 @@ public class GameNoise {
         }
         
         System.out.println(System.nanoTime()-startTime);
-	if (( (System.nanoTime()) -startTime)>(6*(Math.pow(10, 7)))) {
+	if (( (System.nanoTime()) -startTime)>(6*(Math.pow(10, 7))) && mediaPlayerCount < MAX_MEDIAPLAYERS) {
+
             startTime=System.nanoTime();
             soundThread();
 
 	}
-	mediaPlayerCount--;
 
     }
-    gameNoiseTask theTask;
     
     public void soundThread(){
-        
     
-       theTask = new gameNoiseTask(sound);
+       gameNoiseTask theTask = new gameNoiseTask(this.musicFileName);
        Thread th = new Thread(theTask);
        th.setDaemon(true);
        th.start();
@@ -87,14 +92,27 @@ public class GameNoise {
 
         private Media sound;
 
-        public gameNoiseTask(Media sound){
-            this.sound = sound;
+        public gameNoiseTask(String musicFileName){
+            
+            	this.sound = new Media(new File(musicFileName).toURI().toString());
+
         }
         
         @Override
         protected Object call() throws Exception {
+            
+           
+            
+            mediaPlayerCount++;
+
             MediaPlayer mediaPlayer = new MediaPlayer(sound);
             mediaPlayer.play();
+            mediaPlayer.setOnEndOfMedia(new Runnable() {
+                        @Override
+                        public void run() {
+                            mediaPlayerCount=0;                        
+                        }
+                    });
             return sound;
         }
         
