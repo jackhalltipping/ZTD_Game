@@ -27,36 +27,36 @@ public class Model {
     int wave;
 
     public Model() {
-        this.money = new SimpleDoubleProperty(100);
-        this.wave = 0;
+	this.money = new SimpleDoubleProperty(100);
+	this.wave = 0;
     }
 
     public void addPlayer() {
-        thePlayer = new Player(0, 0);
+	thePlayer = new Player(64, 64);
     }
 
     public Player getPlayer() {
-        return thePlayer;
+	return thePlayer;
     }
 
     public double getMoney() {
-        return money.get();
+	return money.get();
     }
 
     public SimpleDoubleProperty getMoneyProperty() {
-        return money;
+	return money;
     }
 
     public int getWave() {
-        return wave;
+	return wave;
     }
 
     public void updateWave() {
-        wave += 1;
+	wave += 1;
     }
 
     public void addMoney(double deposit) {
-        money.set(getMoney() + deposit);
+	money.set(getMoney() + deposit);
     }
 
 }

@@ -7,22 +7,25 @@
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.layout.VBox?>
 
-<VBox id="root" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="779.0" prefWidth="927.0" xmlns="http://javafx.com/javafx/8.0.92" xmlns:fx="http://javafx.com/fxml/1">
+<VBox id="root" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="750.0" prefWidth="1000.0" xmlns="http://javafx.com/javafx/8.0.92" xmlns:fx="http://javafx.com/fxml/1">
    <children>
-      <Pane id="gameRoot" prefHeight="559.0" prefWidth="927.0" />
-      <Pane id="menuRoot" prefHeight="219.0" prefWidth="927.0">
+      <Pane id="gameRoot" prefHeight="500.0" prefWidth="1000.0" />
+      <Pane id="menuRoot" depthTest="ENABLE" prefHeight="250.0" prefWidth="1000.0">
          <children>
-            <Label layoutX="10.0" layoutY="2.0" prefHeight="26.0" prefWidth="52.0" text="Wave:" />
-            <HBox id="towerButtons" layoutX="264.0" layoutY="-2.0" prefHeight="219.0" prefWidth="664.0" />
-            <Button id="startWave" layoutX="141.0" layoutY="1.0" mnemonicParsing="false" text="Start wave" />
-            <Label id="money" layoutX="67.0" layoutY="31.0" prefHeight="26.0" prefWidth="88.0" />
-            <Label id="money" layoutX="10.0" layoutY="31.0" prefHeight="26.0" prefWidth="52.0" text="Money:" />
-            <Label id="wave" layoutX="55.0" layoutY="1.0" prefHeight="26.0" prefWidth="66.0" />
-            <Label id="money" layoutX="10.0" layoutY="60.0" prefHeight="26.0" prefWidth="115.0" text="Player Health:" />
-            <Label id="money" layoutX="10.0" layoutY="90.0" prefHeight="26.0" prefWidth="115.0" text="Tower Info:" />
-            <Label id="towerInfo" layoutX="3.0" layoutY="116.0" prefHeight="100.0" prefWidth="237.0" />
-            <ProgressBar id="playerHealth" layoutX="121.0" layoutY="63.0" prefHeight="20.0" prefWidth="115.0" progress="0.0" />
-            <ProgressBar id="towerHealth" layoutX="121.0" layoutY="93.0" prefHeight="20.0" prefWidth="115.0" progress="0.0" />
+            <Button id="startWave" layoutX="11.0" layoutY="14.0" mnemonicParsing="false" prefHeight="42.0" prefWidth="222.0" text="Next Wave" />
+            <Label id="money" layoutX="122.0" layoutY="69.0" prefHeight="26.0" prefWidth="88.0" />
+            <Label id="money" layoutX="14.0" layoutY="68.0" prefHeight="26.0" prefWidth="52.0" text="Money:" />
+            <Label id="wave" layoutX="121.0" layoutY="133.0" prefHeight="26.0" prefWidth="66.0" />
+            <ProgressBar id="playerHealth" layoutX="121.0" layoutY="102.0" prefHeight="20.0" prefWidth="115.0" progress="0.0" />
+            <Label id="money" layoutX="14.0" layoutY="99.0" prefHeight="26.0" prefWidth="115.0" text="Player Health:" />
+            <Label id="money" layoutX="14.0" layoutY="133.0" prefHeight="26.0" prefWidth="115.0" text="Current Wave:" />
+            <Label id="money" layoutX="14.0" layoutY="167.0" prefHeight="26.0" prefWidth="115.0" text="Highest Wave:" />
+            <Label id="highwave" layoutX="121.0" layoutY="167.0" prefHeight="26.0" prefWidth="66.0" />
+            <VBox layoutX="259.0" layoutY="15.0" prefHeight="197.0" prefWidth="727.0">
+               <children>
+                  <HBox id="towerButtons" prefHeight="210.0" prefWidth="727.0" />
+               </children>
+            </VBox>
          </children></Pane>
    </children>
 </VBox>
