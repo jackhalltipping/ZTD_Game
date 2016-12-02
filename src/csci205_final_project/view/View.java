@@ -127,10 +127,6 @@ public class View {
 		theModel.getWave()));
     }
 
-    public double getMoney() {
-	return 1000.00;
-    }
-
     public void removeViewObj(ViewObj viewObj) {
 	//viewObj.getSp().getChildren().clear();
 	gameRoot.getChildren().remove(viewObj.getSp());
