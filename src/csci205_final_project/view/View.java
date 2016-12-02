@@ -54,7 +54,7 @@ public class View {
     VBox root;
     Pane gameRoot;
     Pane menuRoot;
-    Pane shopRoot;
+    ImageView darkness;
     ArrayList<ViewObj> viewObjs = new ArrayList<ViewObj>();
     TowerEnum tempTowerType;
     StackPane tempTower;
@@ -80,7 +80,7 @@ public class View {
 	root = FXMLLoader.load(url);
 	gameRoot = (Pane) root.lookup("#gameRoot");
 	menuRoot = (Pane) root.lookup("#menuRoot");
-	//shopRoot = (Pane) root.lookup("#shopPane");
+	darkness = (ImageView) root.lookup("#darkness");
     }
 
     public Parent getRoot() {
@@ -116,6 +116,8 @@ public class View {
 	addLabels();
 
 	viewObjs.add(viewObj);
+	menuRoot.toFront();
+	darkness.toFront();
     }
 
     public ArrayList<ViewObj> getViewObjs() {
