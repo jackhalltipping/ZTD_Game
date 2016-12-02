@@ -53,210 +53,226 @@ public class Ctrl {
     ArrayList<Projectile> projectiles = new ArrayList<Projectile>();
 
     public Ctrl(Model theModel, View theView) {
-        this.theModel = theModel;
-        this.theView = theView;
+	this.theModel = theModel;
+	this.theView = theView;
 
-        setKeyBindings();
-        start();
-        setWaveButtonAction();
+	setKeyBindings();
+	start();
+	setWaveButtonAction();
     }
 
     public void setKeyBindings() {
-        EventHandler<KeyEvent> keyEvent = (new EventHandler<KeyEvent>() {
-            @Override
-            public void handle(KeyEvent ke) {
-                if (ke.getEventType().equals(KeyEvent.KEY_PRESSED)) {
-                    if (ke.getCode().equals(KeyCode.D)) {
-                        theModel.getPlayer().setMoveDirection(0);
-                        theModel.getPlayer().setSpeed(1);
-                    }
-                    if (ke.getCode().equals(KeyCode.W)) {
-                        theModel.getPlayer().setMoveDirection(270);
-                        theModel.getPlayer().setSpeed(1);
-                    }
-                    if (ke.getCode().equals(KeyCode.A)) {
-                        theModel.getPlayer().setMoveDirection(180);
-                        theModel.getPlayer().setSpeed(1);
-                    }
-                    if (ke.getCode().equals(KeyCode.S)) {
-                        theModel.getPlayer().setMoveDirection(90);
-                        theModel.getPlayer().setSpeed(1);
-                    }
-                    if (ke.getCode().equals(KeyCode.M)) {
-                        theView.setTempTower(TowerEnum.MINIGUN);
-                    }
-                    if (ke.getCode().equals(KeyCode.L)) {
-                        theView.setTempTower(TowerEnum.LASER);
-                    }
-                    if (ke.getCode().equals(KeyCode.C)) {
-                        theView.setTempTower(TowerEnum.CANNON);
-                    }
-                    if (ke.getCode().equals(KeyCode.T)) {
-                        theView.setTempTower(TowerEnum.MISSLE_LAUNCHER);
-                    }
-                    if (ke.getCode().equals(KeyCode.ESCAPE)) {
-                        theView.setTempTower(null);
-                    }
+	EventHandler<KeyEvent> keyEvent = (new EventHandler<KeyEvent>() {
+	    @Override
+	    public void handle(KeyEvent ke) {
+		if (ke.getEventType().equals(KeyEvent.KEY_PRESSED)) {
+		    if (ke.getCode().equals(KeyCode.D)) {
+			theModel.getPlayer().setMoveDirection(0);
+			theModel.getPlayer().setSpeed(1);
+		    }
+		    if (ke.getCode().equals(KeyCode.W)) {
+			theModel.getPlayer().setMoveDirection(270);
+			theModel.getPlayer().setSpeed(1);
+		    }
+		    if (ke.getCode().equals(KeyCode.A)) {
+			theModel.getPlayer().setMoveDirection(180);
+			theModel.getPlayer().setSpeed(1);
+		    }
+		    if (ke.getCode().equals(KeyCode.S)) {
+			theModel.getPlayer().setMoveDirection(90);
+			theModel.getPlayer().setSpeed(1);
+		    }
+		    if (ke.getCode().equals(KeyCode.M)) {
+			theView.setTempTower(TowerEnum.MINIGUN);
+		    }
+		    if (ke.getCode().equals(KeyCode.L)) {
+			theView.setTempTower(TowerEnum.LASER);
+		    }
+		    if (ke.getCode().equals(KeyCode.C)) {
+			theView.setTempTower(TowerEnum.CANNON);
+		    }
+		    if (ke.getCode().equals(KeyCode.T)) {
+			theView.setTempTower(TowerEnum.MISSLE_LAUNCHER);
+		    }
+		    if (ke.getCode().equals(KeyCode.ESCAPE)) {
+			theView.setTempTower(null);
+		    }
 
-                }
-                if (ke.getEventType().equals(KeyEvent.KEY_RELEASED)) {
-                    theModel.getPlayer().setSpeed(0);
-                }
-            }
+		}
+		if (ke.getEventType().equals(KeyEvent.KEY_RELEASED)) {
+		    theModel.getPlayer().setSpeed(0);
+		}
+	    }
 
-        });
+	});
 
-        theView.getScene().setOnKeyPressed(keyEvent);
-        theView.getScene().setOnKeyReleased(keyEvent);
+	theView.getScene().setOnKeyPressed(keyEvent);
+	theView.getScene().setOnKeyReleased(keyEvent);
 
-        theView.getGameRoot().setOnMousePressed(new EventHandler<MouseEvent>() {
-            @Override
-            public void handle(MouseEvent event) {
-                double mouseX = event.getSceneX();
-                double mouseY = event.getSceneY();
+	theView.getGameRoot().setOnMousePressed(new EventHandler<MouseEvent>() {
+	    @Override
+	    public void handle(MouseEvent event) {
+		double mouseX = event.getSceneX();
+		double mouseY = event.getSceneY();
 
-                if (theView.getTempTower() != null) {
-                    TowerEnum towerType = theView.getTempTower();
-                    if (theModel.getMoney() >= towerType.price) {
-                        new Tower(mouseX, mouseY, towerType);
-                        theView.setTempTower(null);
-                        theModel.addMoney(-towerType.price);
-                    }
-                } else {
-                    theModel.getPlayer().fighter.fire(null);
-                }
-            }
+		if (theView.getTempTower() != null) {
+		    TowerEnum towerType = theView.getTempTower();
+		    if (theModel.getMoney() >= towerType.price) {
+			new Tower(mouseX, mouseY, towerType);
+			theView.setTempTower(null);
+			theModel.addMoney(-towerType.price);
+		    }
+		} else {
+		    theModel.getPlayer().fighter.fire(null);
+		}
+	    }
 
-        });
-        theView.getGameRoot().setOnMouseMoved(new EventHandler<MouseEvent>() {
-            @Override
-            public void handle(MouseEvent event) {
-                theView.setMouse(event.getSceneX(), event.getSceneY());
-            }
+	});
+	theView.getGameRoot().setOnMouseMoved(new EventHandler<MouseEvent>() {
+	    @Override
+	    public void handle(MouseEvent event) {
+		theView.setMouse(event.getSceneX(), event.getSceneY());
+	    }
 
-        });
+	});
     }
 
     public void addFighter(Fighter fighter) {
-        fighters.add(fighter);
+	fighters.add(fighter);
     }
 
     public void start() {
-        PauseTransition wait = new PauseTransition(Duration.seconds(DT));
-        wait.setOnFinished((e) -> {
-            this.frame();
-            wait.playFromStart();
-        });
-        wait.play();
+	PauseTransition wait = new PauseTransition(Duration.seconds(DT));
+	wait.setOnFinished((e) -> {
+	    this.frame();
+	    wait.playFromStart();
+	});
+	wait.play();
     }
 
     public void frame() {
-        ArrayList<ViewObj> viewObjs = theView.getViewObjs();
-        for (ViewObj viewObj : viewObjs) {
-            viewObj.frame(DT);
-        }
-        for (Fighter fighter : fighters) {
-            fighter.update(DT, fighters);
-        }
-        for (int i = 0; i < projectiles.size(); i++) {
-            i -= projectiles.get(i).update(DT, fighters);
-        }
-        if (random.nextDouble() <= DT * ZPS && inWave) {
-            //wave incrementation
-            zombiesPerWave -= 1;
-            if (zombiesPerWave == 0) {
-                endWave();
+	ArrayList<ViewObj> viewObjs = theView.getViewObjs();
+	for (ViewObj viewObj : viewObjs) {
+	    viewObj.frame(DT);
+	}
+	for (Fighter fighter : fighters) {
+	    fighter.update(DT, fighters);
+	}
+	for (int i = 0; i < projectiles.size(); i++) {
+	    i -= projectiles.get(i).update(DT, fighters);
+	}
+	if (random.nextDouble() <= DT * ZPS && inWave) {
+	    //wave incrementation
+	    zombiesPerWave -= 1;
+	    if (zombiesPerWave == 0) {
+		endWave();
 
-            }
+	    }
 
-            new Enemy(
-                    random.nextDouble() * ((Pane) theView.getGameRoot()).getWidth(),
-                    random.nextDouble() * ((Pane) theView.getGameRoot()).getHeight());
-            Enemy.setReward((int) (0.5 * theModel.getWave()) + 2);
-        }
+	    double x, y;
+	    double offscreenDist = 64;
+	    if (random.nextBoolean()) {
+		x = random.nextDouble() * ((Pane) theView.getGameRoot()).getWidth();
+		if (random.nextBoolean()) {
+		    y = -1 * offscreenDist;
+		} else {
+		    y = random.nextDouble() * ((Pane) theView.getGameRoot()).getHeight() + offscreenDist;
+		}
+	    } else {
+		y = random.nextDouble() * ((Pane) theView.getGameRoot()).getHeight();
+		if (random.nextBoolean()) {
+		    x = -1 * offscreenDist;
+		} else {
+		    x = random.nextDouble() * ((Pane) theView.getGameRoot()).getWidth() + offscreenDist;
+		}
+	    }
+
+	    new Enemy(x, y);
+	    Enemy.setReward((int) (0.5 * theModel.getWave()) + 2);
+	}
     }
 
     private void endWave() {
-        theModel.updateWave();
-        inWave = false;
-        theModel.addMoney(theModel.getWave() * 25 + 50);
-        zombiesPerWave = (int) (Math.sqrt(theModel.getWave() ^ (3)) + 10 * theModel.getWave());
-        ZPS += 1 / 2;
+	theModel.updateWave();
+	inWave = false;
+	theModel.addMoney(theModel.getWave() * 25 + 50);
+	zombiesPerWave = (int) (Math.sqrt(theModel.getWave() ^ (3)) + 10 * theModel.getWave());
+	ZPS += 1 / 2;
 
-        Enemy.setHealth(
-                (int) (Enemy.getHealth() + Math.sqrt(theModel.getWave()) * 1.5)
-        );
+	Enemy.setHealth(
+		(int) (Enemy.getHealth() + Math.sqrt(theModel.getWave()) * 1.5)
+	);
     }
 
     public void removeFighter(Fighter fighter) {
-        fighters.remove(fighter);
+	fighters.remove(fighter);
     }
 
     public void removeProjectile(Projectile projectile) {
-        projectiles.remove(projectile);
+	projectiles.remove(projectile);
     }
 
     public void addProjectile(Projectile projectile) {
-        projectiles.add(projectile);
+	projectiles.add(projectile);
     }
 
     public double convertX(double x) {
-        int tileSize = 50;
-        return x - (x % tileSize);
+	int tileSize = 50;
+	return x - (x % tileSize);
     }
 
     public double convertY(double y) {
-        int tileSize = 50;
-        return y - (y % tileSize);
+	int tileSize = 50;
+	return y - (y % tileSize);
     }
 
     public void setEvents() {
-        setHandler("startWave");
-        setHandler("createTower");
+	setHandler("startWave");
+	setHandler("createTower");
     }
 
     public void setHandler(String id) {
-        theView.getMenuRoot().lookup("#" + id).addEventHandler(
-                MouseEvent.MOUSE_CLICKED,
-                new EventHandler<MouseEvent>() {
-            @Override
-            public void handle(MouseEvent event) {
-                try {
-                    Ctrl.handle(id);
-                } catch (Exception ex) {
+	theView.getMenuRoot().lookup("#" + id).addEventHandler(
+		MouseEvent.MOUSE_CLICKED,
+		new EventHandler<MouseEvent>() {
+	    @Override
+	    public void handle(MouseEvent event) {
+		try {
+		    Ctrl.handle(id);
+		} catch (Exception ex) {
 
-                }
-            }
-        });
+		}
+	    }
+	});
     }
 
     public static void handle(String id) throws IOException, ClassNotFoundException {
-        System.out.println("Handling: " + id + " click");
-        switch (id) {
-            case "startWave":
-                Ctrl.startWave();
-                break;
-            case "createTower":
-                break;
-        }
+	System.out.println("Handling: " + id + " click");
+	switch (id) {
+	    case "startWave":
+		Ctrl.startWave();
+		break;
+	    case "createTower":
+		break;
+	}
     }
 
     public static void startWave() {
-        //should be inWave=true
-        inWave = true;
-        //other stuff
+	//should be inWave=true
+	inWave = true;
+	//other stuff
     }
 
     private void setWaveButtonAction() {
-        Button waveButton = ((Button) theView.getMenuRoot().lookup("#startWave"));
-        waveButton.addEventHandler(ActionEvent.ACTION,
-                                   new EventHandler<ActionEvent>() {
-                               @Override
-                               public void handle(ActionEvent event) {
-                                   startWave();
-                               }
+	Button waveButton = ((Button) theView.getMenuRoot().lookup("#startWave"));
+	waveButton.addEventHandler(ActionEvent.ACTION,
+				   new EventHandler<ActionEvent>() {
+			       @Override
+			       public void handle(ActionEvent event) {
+				   startWave();
+			       }
 
-                           });
+			   });
     }
 
 }
