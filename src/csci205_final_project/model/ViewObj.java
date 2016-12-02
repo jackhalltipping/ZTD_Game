@@ -38,7 +38,7 @@ public class ViewObj {
 	this.image = image;
 
 	Game.theView.addViewObj(this);
-	Game.theView.getMenuRoot().toFront();
+
     }
 
     public double getX() {
