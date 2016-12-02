@@ -200,8 +200,7 @@ public class Ctrl {
         ZPS += 1 / 2;
 
         Enemy.setHealth(
-                (int) (Enemy.getHealth() + Math.sqrt(theModel.getWave()) * 2)
-        );
+                (int) (Enemy.getHealth() + Math.sqrt(theModel.getWave()) * 2)+3);
     }
 
     public void removeFighter(Fighter fighter) {
