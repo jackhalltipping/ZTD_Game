@@ -54,12 +54,12 @@ public class GameNoise {
      
         if(firstPass){
             firstPass=false;
-            int startTime = System.nanoTime();
+            int startTime = (int)System.nanoTime();
             soundThread();
         }
         
         System.out.println(System.nanoTime()-startTime);
-	if (( ((int)System.nanoTime()) -startTime)>(3*(10^8))) {
+	if (( (System.nanoTime()) -startTime)>(6*(Math.pow(10, 7)))) {
             startTime=System.nanoTime();
             soundThread();
 
@@ -76,6 +76,7 @@ public class GameNoise {
        Thread th = new Thread(theTask);
        th.setDaemon(true);
        th.start();
+       
     }
     
     
@@ -96,6 +97,7 @@ public class GameNoise {
             mediaPlayer.play();
             return sound;
         }
+        
         
         
     }
