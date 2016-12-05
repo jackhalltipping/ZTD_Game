@@ -49,6 +49,7 @@ public class Game extends Application {
 	primaryStage.setTitle("ZTD 47");
 	primaryStage.setScene(scene);
 	primaryStage.sizeToScene();
+	primaryStage.setResizable(false);
 	primaryStage.show();
 	theView.initTowerButtons();
 	theView.setViewBindings();
