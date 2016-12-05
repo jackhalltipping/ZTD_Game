@@ -6,11 +6,15 @@
 package csci205_final_project;
 
 import csci205_final_project.ctrl.Ctrl;
+import csci205_final_project.ctrl.GameNoise;
 import csci205_final_project.model.Model;
 import csci205_final_project.view.View;
+import java.io.File;
 import java.io.IOException;
 import javafx.application.Application;
 import javafx.scene.Scene;
+import javafx.scene.media.Media;
+import javafx.scene.media.MediaPlayer;
 import javafx.stage.Stage;
 
 /**
@@ -37,7 +41,10 @@ public class Game extends Application {
 
     @Override
     public void start(Stage primaryStage) throws Exception {
-	// Now, set up the scene, and connect it to the stage!
+	// start the music
+        GameNoise backgroundMusic = new GameNoise();
+        backgroundMusic.play();
+        
 	Scene scene = new Scene(theView.getRoot());
 	theView.setScene(scene);
 
@@ -49,6 +56,7 @@ public class Game extends Application {
 	primaryStage.setTitle("ZTD 47");
 	primaryStage.setScene(scene);
 	primaryStage.sizeToScene();
+	primaryStage.setResizable(false);
 	primaryStage.show();
 	theView.initTowerButtons();
 	theView.setViewBindings();

@@ -28,7 +28,7 @@ public class Tower extends ViewObj {
 	this.fighter = new Fighter(towerType.range, towerType.frrt,
 				   towerType.power, towerType.projSpeed,
 				   towerType.projImage, towerType.tracks,
-				   towerType.health, 0, this, 0);
+				   towerType.health, 0, this, 0, towerType.soundFileName);
     }
 
     @Override
