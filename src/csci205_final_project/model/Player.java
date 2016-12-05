@@ -69,5 +69,8 @@ public class Player extends Mob {
     public double getMoveDirection() {
 	return moveDirection; //This is so image points in the right direction
     }
-
+    
+    public double getHealth() {
+        return this.health;
+    }
 }

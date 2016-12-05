@@ -74,6 +74,7 @@ public class View {
     }
 
     private void setRoot() throws MalformedURLException, IOException {
+
 	File file = new File("src/csci205_final_project/view/layout.fxml");
 	URL url = file.toURL();
 	System.out.println(url);
@@ -84,11 +85,11 @@ public class View {
     }
 
     public Parent getRoot() {
-	return root;
+        return root;
     }
 
     public Parent getGameRoot() {
-	return gameRoot;
+        return gameRoot;
     }
 
     public Parent getMenuRoot() {
@@ -96,22 +97,22 @@ public class View {
     }
 
     public Scene getScene() {
-	return scene;
+        return scene;
     }
 
     public void setScene(Scene scene) {
-	this.scene = scene;
+        this.scene = scene;
     }
 
     public void addViewObj(ViewObj viewObj) {
-	StackPane sp = new StackPane();
-	viewObj.setSp(sp);
-	ImageView imgView = new ImageView(viewObj.getImage());
-	sp.getChildren().add(imgView);
-	sp.layoutXProperty().bind(viewObj.getXProp());
-	sp.layoutYProperty().bind(viewObj.getYProp());
-	sp.rotateProperty().bind(viewObj.getDirectionProp());
-	gameRoot.getChildren().add(sp);
+        StackPane sp = new StackPane();
+        viewObj.setSp(sp);
+        ImageView imgView = new ImageView(viewObj.getImage());
+        sp.getChildren().add(imgView);
+        sp.layoutXProperty().bind(viewObj.getXProp());
+        sp.layoutYProperty().bind(viewObj.getYProp());
+        sp.rotateProperty().bind(viewObj.getDirectionProp());
+        gameRoot.getChildren().add(sp);
 
 	addLabels();
 
@@ -121,7 +122,7 @@ public class View {
     }
 
     public ArrayList<ViewObj> getViewObjs() {
-	return viewObjs;
+        return viewObjs;
     }
 
     public void addLabels() {
@@ -130,9 +131,9 @@ public class View {
     }
 
     public void removeViewObj(ViewObj viewObj) {
-	//viewObj.getSp().getChildren().clear();
-	gameRoot.getChildren().remove(viewObj.getSp());
-	viewObjs.remove(viewObj);
+        //viewObj.getSp().getChildren().clear();
+        gameRoot.getChildren().remove(viewObj.getSp());
+        viewObjs.remove(viewObj);
     }
 
     public TowerEnum getTempTower() {

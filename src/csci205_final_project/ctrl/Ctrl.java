@@ -1,18 +1,3 @@
-/* *****************************************
-* CSCI205 - Software Engineering and Design
-* Fall 2016
-*
-* Name: NAMES of team members
-* Date: Nov 8, 2016
-* Time: 2:53:07 PM
-*
-* Project: csci205_final_project
-* Package: csci205_final_project.ctrl
-* File: Ctrl
-* Description:
-*
-* ****************************************
- */
 package csci205_final_project.ctrl;
 
 import csci205_final_project.model.Enemy;
@@ -37,7 +22,24 @@ import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.Pane;
 import javafx.util.Duration;
 
+
+/* *****************************************
+* CSCI205 - Software Engineering and Design
+* Fall 2016
+*
+* Name: NAMES of team members
+* Date: Nov 8, 2016
+* Time: 2:53:07 PM
+*
+* Project: csci205_final_project
+* Package: csci205_final_project.ctrl
+* File: Ctrl
+* Description:
+*
+* ****************************************
+ */
 /**
+ * Controller class for the MVC
  *
  * @author emb038
  */
@@ -52,7 +54,14 @@ public class Ctrl {
     int zombiesLeftInWave = 10;
     ArrayList<Fighter> fighters = new ArrayList<Fighter>();
     ArrayList<Projectile> projectiles = new ArrayList<Projectile>();
+    public static boolean running = true;
 
+    /**
+     * Constructor for the controller class
+     *
+     * @param theModel
+     * @param theView
+     */
     public Ctrl(Model theModel, View theView) {
 	this.theModel = theModel;
 	this.theView = theView;
@@ -62,6 +71,9 @@ public class Ctrl {
 	setWaveButtonAction();
     }
 
+    /**
+     * Setter for the keys
+     */
     public void setKeyBindings() {
 	EventHandler<KeyEvent> keyEvent = (new EventHandler<KeyEvent>() {
 	    @Override
@@ -111,6 +123,13 @@ public class Ctrl {
 	theView.getScene().setOnKeyReleased(keyEvent);
 
 	theView.getGameRoot().setOnMousePressed(new EventHandler<MouseEvent>() {
+
+	    /**
+	     * handler for the mouse event when its pressed so the tower can be
+	     * placed
+	     *
+	     * @param event
+	     */
 	    @Override
 	    public void handle(MouseEvent event) {
 		double mouseX = event.getSceneX();
@@ -130,6 +149,12 @@ public class Ctrl {
 
 	});
 	theView.getGameRoot().setOnMouseMoved(new EventHandler<MouseEvent>() {
+
+	    /**
+	     * handler for the event when the mouse is moved
+	     *
+	     * @param event
+	     */
 	    @Override
 	    public void handle(MouseEvent event) {
 		theView.setMouse(event.getSceneX(), event.getSceneY());
@@ -138,19 +163,32 @@ public class Ctrl {
 	});
     }
 
+    /**
+     * Adds fighters to the game
+     *
+     * @param fighter
+     */
     public void addFighter(Fighter fighter) {
 	fighters.add(fighter);
     }
 
+    /**
+     * Method to start the game
+     */
     public void start() {
 	PauseTransition wait = new PauseTransition(Duration.seconds(DT));
 	wait.setOnFinished((e) -> {
-	    this.frame();
+	    if (Ctrl.running) {
+		this.frame();
+	    }
 	    wait.playFromStart();
 	});
 	wait.play();
     }
 
+    /**
+     * Sets the frame for the game
+     */
     public void frame() {
 	ArrayList<ViewObj> viewObjs = theView.getViewObjs();
 	for (ViewObj viewObj : viewObjs) {
@@ -197,6 +235,10 @@ public class Ctrl {
 	}
     }
 
+    /**
+     * Ends the wave of Zombies and changes characteristics such as health for
+     * the enemies
+     */
     private void endWave() {
 	theModel.updateWave();
 	inWave = false;
@@ -208,33 +250,68 @@ public class Ctrl {
 		(int) (Enemy.getHealth() + Math.sqrt(theModel.getWave()) * 2) + 3);
     }
 
+    /**
+     * Removes a fighter from the ArrayList of Fighters
+     *
+     * @param fighter
+     */
     public void removeFighter(Fighter fighter) {
 	fighters.remove(fighter);
     }
 
+    /**
+     * Removes a specified projectile from the ArrayList of projectiles
+     *
+     * @param projectile
+     */
     public void removeProjectile(Projectile projectile) {
 	projectiles.remove(projectile);
     }
 
+    /**
+     * Adds projectiles to the ArrayList of projectiles
+     *
+     * @param projectile
+     */
     public void addProjectile(Projectile projectile) {
 	projectiles.add(projectile);
     }
 
+    /**
+     * Converts X to an appropriate coordinate for the game
+     *
+     * @param x coordinate
+     * @return double adjusted coordinate
+     */
     public double convertX(double x) {
 	int tileSize = 50;
 	return x - (x % tileSize);
     }
 
+    /**
+     * Converts Y to an appropriate coordinate for the game
+     *
+     * @param y coordinate
+     * @return double adjusted coordinate
+     */
     public double convertY(double y) {
 	int tileSize = 50;
 	return y - (y % tileSize);
     }
 
+    /**
+     * sets events for different buttons
+     */
     public void setEvents() {
 	setHandler("startWave");
 	setHandler("createTower");
     }
 
+    /**
+     * Calls the handler for the specified button
+     *
+     * @param id of the button
+     */
     public void setHandler(String id) {
 	theView.getMenuRoot().lookup("#" + id).addEventHandler(
 		MouseEvent.MOUSE_CLICKED,
@@ -250,6 +327,13 @@ public class Ctrl {
 	});
     }
 
+    /**
+     * Handler which uses switch to handle different buttons
+     *
+     * @param id of the button
+     * @throws IOException
+     * @throws ClassNotFoundException
+     */
     public static void handle(String id) throws IOException, ClassNotFoundException {
 	System.out.println("Handling: " + id + " click");
 	switch (id) {
@@ -261,12 +345,18 @@ public class Ctrl {
 	}
     }
 
+    /**
+     * Starts the wave of zombies
+     */
     public static void startWave() {
 	//should be inWave=true
 	inWave = true;
 	//other stuff
     }
 
+    /**
+     * Handler for the start Wave button
+     */
     private void setWaveButtonAction() {
 	Button waveButton = ((Button) theView.getMenuRoot().lookup("#startWave"));
 	waveButton.addEventHandler(ActionEvent.ACTION,
