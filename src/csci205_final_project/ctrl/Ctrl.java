@@ -16,6 +16,7 @@
 package csci205_final_project.ctrl;
 
 import csci205_final_project.model.Enemy;
+import csci205_final_project.model.EnemyEnum;
 import csci205_final_project.model.Fighter;
 import csci205_final_project.model.Model;
 import csci205_final_project.model.Projectile;
@@ -48,7 +49,7 @@ public class Ctrl {
     static boolean inWave;
     double DT = 0.02; //Frame duration in seconds
     double ZPS = 2; //average zombies per second
-    int zombiesPerWave = 10;
+    int zombiesLeftInWave = 10;
     ArrayList<Fighter> fighters = new ArrayList<Fighter>();
     ArrayList<Projectile> projectiles = new ArrayList<Projectile>();
 
@@ -163,10 +164,9 @@ public class Ctrl {
 	}
 	if (random.nextDouble() <= DT * ZPS && inWave) {
 	    //wave incrementation
-	    zombiesPerWave -= 1;
-	    if (zombiesPerWave == 0) {
+	    zombiesLeftInWave -= 1;
+	    if (zombiesLeftInWave < EnemyEnum.lowestReward) {
 		endWave();
-
 	    }
 
 	    double x, y;
@@ -187,20 +187,25 @@ public class Ctrl {
 		}
 	    }
 
-	    new Enemy(x, y);
-            Enemy.setReward((int) (0.1* theModel.getWave()+0.5));
-        }
+	    EnemyEnum enemyType;
+	    do {
+		enemyType = EnemyEnum.values()[random.nextInt(
+			EnemyEnum.values().length)];
+	    } while (enemyType.reward > zombiesLeftInWave);
+	    zombiesLeftInWave -= enemyType.reward;
+	    new Enemy(x, y, enemyType);
+	}
     }
 
     private void endWave() {
-        theModel.updateWave();
-        inWave = false;
-        theModel.addMoney(theModel.getWave() * 10 + 25);
-        zombiesPerWave = (int) (Math.sqrt(theModel.getWave() ^ (3)) + 10 * theModel.getWave());
-        ZPS += 1 / 2;
+	theModel.updateWave();
+	inWave = false;
+	theModel.addMoney(theModel.getWave() * 10 + 25);
+	zombiesLeftInWave = 2 * (int) (Math.sqrt(theModel.getWave() ^ (3)) + 10 * theModel.getWave());
+	ZPS += 1 / 2;
 
-        Enemy.setHealth(
-                (int) (Enemy.getHealth() + Math.sqrt(theModel.getWave()) * 2)+3);
+	Enemy.setHealth(
+		(int) (Enemy.getHealth() + Math.sqrt(theModel.getWave()) * 2) + 3);
     }
 
     public void removeFighter(Fighter fighter) {
