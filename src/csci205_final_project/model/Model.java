@@ -16,6 +16,7 @@
 package csci205_final_project.model;
 
 import javafx.beans.property.SimpleDoubleProperty;
+import javafx.beans.property.SimpleIntegerProperty;
 
 /**
  *
@@ -24,15 +25,19 @@ import javafx.beans.property.SimpleDoubleProperty;
 public class Model {
     Player thePlayer;
     SimpleDoubleProperty money;
-    int wave;
+    SimpleIntegerProperty wave;
+    static SimpleIntegerProperty highWave;
 
     public Model() {
 	this.money = new SimpleDoubleProperty(100);
-	this.wave = 0;
+	this.wave = new SimpleIntegerProperty(0);
+        if(highWave==null){
+            highWave=new SimpleIntegerProperty(0);
+        }
     }
 
     public void addPlayer() {
-	thePlayer = new Player(0, 0);
+	thePlayer = new Player(64, 64);
     }
 
     public Player getPlayer() {
@@ -47,12 +52,19 @@ public class Model {
 	return money;
     }
 
-    public double getWave() {
-	return wave;
+    public int getWave() {
+	return wave.getValue();
     }
 
     public void updateWave() {
-	wave += 1;
+	wave.setValue(wave.add(1).getValue());
+        if(wave.getValue()>highWave.getValue()){
+            highWave.setValue(wave.getValue());
+        }
+    }
+
+    public SimpleIntegerProperty getHighWave() {
+        return highWave;
     }
 
     public void addMoney(double deposit) {

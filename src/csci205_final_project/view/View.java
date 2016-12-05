@@ -28,16 +28,21 @@ import javafx.beans.property.SimpleDoubleProperty;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXMLLoader;
+import javafx.geometry.Insets;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.ProgressBar;
 import javafx.scene.image.ImageView;
+import javafx.scene.layout.Background;
+import javafx.scene.layout.BackgroundFill;
+import javafx.scene.layout.CornerRadii;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
+import javafx.scene.paint.Color;
 
 /**
  *
@@ -49,7 +54,7 @@ public class View {
     VBox root;
     Pane gameRoot;
     Pane menuRoot;
-    Pane shopRoot;
+    ImageView darkness;
     ArrayList<ViewObj> viewObjs = new ArrayList<ViewObj>();
     TowerEnum tempTowerType;
     StackPane tempTower;
@@ -64,6 +69,8 @@ public class View {
 	tempTower.layoutXProperty().bind(mouseX);
 	tempTower.layoutYProperty().bind(mouseY);
 	gameRoot.getChildren().add(tempTower);
+	menuRoot.setBackground(new Background(new BackgroundFill(Color.web(
+		"#DDDDDD"), CornerRadii.EMPTY, Insets.EMPTY)));
     }
 
     private void setRoot() throws MalformedURLException, IOException {
@@ -74,7 +81,7 @@ public class View {
 	root = FXMLLoader.load(url);
 	gameRoot = (Pane) root.lookup("#gameRoot");
 	menuRoot = (Pane) root.lookup("#menuRoot");
-	//shopRoot = (Pane) root.lookup("#shopPane");
+	darkness = (ImageView) root.lookup("#darkness");
     }
 
     public Parent getRoot() {
@@ -107,11 +114,11 @@ public class View {
         sp.rotateProperty().bind(viewObj.getDirectionProp());
         gameRoot.getChildren().add(sp);
 
-
 	addLabels();
 
 	viewObjs.add(viewObj);
-
+	menuRoot.toFront();
+	darkness.toFront();
     }
 
     public ArrayList<ViewObj> getViewObjs() {
@@ -121,12 +128,6 @@ public class View {
     public void addLabels() {
 	((Label) menuRoot.lookup("#wave")).setText(String.valueOf(
 		theModel.getWave()));
-
-    }
-
-
-    public double getMoney() {
-	return 1000.00;
     }
 
     public void removeViewObj(ViewObj viewObj) {
@@ -174,6 +175,7 @@ public class View {
 		theModel.getPlayer().fighter.getPlayerHealthProperty());
 	((Label) root.lookup("#money")).textProperty().bind(
 		theModel.getMoneyProperty().asString());
+        ((Label)menuRoot.lookup("#highwave")).textProperty().bind(theModel.getHighWave().asString());
     }
 
 }

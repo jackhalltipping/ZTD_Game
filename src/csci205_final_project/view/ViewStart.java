@@ -33,10 +33,19 @@ public class ViewStart {
     Scene scene;
     VBox root;
     
+    /**
+     * Constructor which sets the root for the start screen
+     * @throws IOException
+     */
     public ViewStart() throws IOException {
 	setRoot();
     }
-
+    
+    /**
+     * Sets the root by uploading file from the fxml file
+     * @throws MalformedURLException
+     * @throws IOException 
+     */
     private void setRoot() throws MalformedURLException, IOException {
 
 	File file = new File("src/csci205_final_project/view/startPane.fxml");
@@ -45,14 +54,26 @@ public class ViewStart {
 	root = FXMLLoader.load(url);
     }
     
+    /**
+     * getter for our root
+     * @return Parent our root
+     */
     public Parent getRoot() {
         return root;
     }
     
+    /**
+     * getter for the scene
+     * @return screen 
+     */
     public Scene getScene() {
         return scene;
     }
 
+    /**
+     * setter for the scene
+     * @param scene
+     */
     public void setScene(Scene scene) {
         this.scene = scene;
     }

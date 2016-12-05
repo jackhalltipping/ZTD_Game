@@ -21,7 +21,7 @@ import javafx.scene.layout.BorderPane;
 import javafx.stage.Stage;
 
 /**
- *
+ * 
  * @author emb038
  */
 public class Game extends Application {
@@ -36,7 +36,11 @@ public class Game extends Application {
 	launch(args);
 
     }
-
+    
+    /**
+     * 
+     * @throws IOException 
+     */
     @Override
     public void init() throws IOException {
 	theModel = new Model();

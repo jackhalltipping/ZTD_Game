@@ -17,6 +17,7 @@ package csci205_final_project.model;
 
 import csci205_final_project.Game;
 import javafx.scene.image.Image;
+import javafx.scene.layout.Pane;
 
 /**
  *
@@ -44,7 +45,16 @@ public class Player extends Mob {
     }
 
     public void frame(double duration) {
-	super.frame(duration);
+	double buffer = 48;//pixels
+
+	double nextX = getX() + buffer * Math.cos(
+		getMoveDirection() * Math.PI / 180.0);
+	double nextY = getY() + buffer * Math.sin(
+		getMoveDirection() * Math.PI / 180.0);
+
+	if (0 < nextX && nextX < ((Pane) Game.theView.getGameRoot()).getWidth() && 0 < nextY && nextY < ((Pane) Game.theView.getGameRoot()).getHeight()) {
+	    super.frame(duration);
+	}
 	double dir = Math.toDegrees(Math.atan2(
 		Game.theView.getMouseX() - getX(),
 		Game.theView.getMouseY() - getY()));

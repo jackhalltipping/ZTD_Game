@@ -48,6 +48,7 @@ public class Ctrl {
     static boolean inWave;
     double DT = 0.02; //Frame duration in seconds
     double ZPS = 2; //average zombies per second
+    int zombiesPerWave = 10;
     ArrayList<Fighter> fighters = new ArrayList<Fighter>();
     ArrayList<Projectile> projectiles = new ArrayList<Projectile>();
 
@@ -161,11 +162,45 @@ public class Ctrl {
 	    i -= projectiles.get(i).update(DT, fighters);
 	}
 	if (random.nextDouble() <= DT * ZPS && inWave) {
-	    new Enemy(
-		    random.nextDouble() * ((Pane) theView.getGameRoot()).getWidth(),
-		    random.nextDouble() * ((Pane) theView.getGameRoot()).getHeight());
-	}
-	ZPS += 0; //adaptive difficulty
+	    //wave incrementation
+	    zombiesPerWave -= 1;
+	    if (zombiesPerWave == 0) {
+		endWave();
+
+	    }
+
+	    double x, y;
+	    double offscreenDist = 64;
+	    if (random.nextBoolean()) {
+		x = random.nextDouble() * ((Pane) theView.getGameRoot()).getWidth();
+		if (random.nextBoolean()) {
+		    y = -1 * offscreenDist;
+		} else {
+		    y = random.nextDouble() * ((Pane) theView.getGameRoot()).getHeight() + offscreenDist;
+		}
+	    } else {
+		y = random.nextDouble() * ((Pane) theView.getGameRoot()).getHeight();
+		if (random.nextBoolean()) {
+		    x = -1 * offscreenDist;
+		} else {
+		    x = random.nextDouble() * ((Pane) theView.getGameRoot()).getWidth() + offscreenDist;
+		}
+	    }
+
+	    new Enemy(x, y);
+            Enemy.setReward((int) (0.1* theModel.getWave()+0.5));
+        }
+    }
+
+    private void endWave() {
+        theModel.updateWave();
+        inWave = false;
+        theModel.addMoney(theModel.getWave() * 10 + 25);
+        zombiesPerWave = (int) (Math.sqrt(theModel.getWave() ^ (3)) + 10 * theModel.getWave());
+        ZPS += 1 / 2;
+
+        Enemy.setHealth(
+                (int) (Enemy.getHealth() + Math.sqrt(theModel.getWave()) * 2)+3);
     }
 
     public void removeFighter(Fighter fighter) {
@@ -223,7 +258,7 @@ public class Ctrl {
 
     public static void startWave() {
 	//should be inWave=true
-	inWave = !inWave;
+	inWave = true;
 	//other stuff
     }
 

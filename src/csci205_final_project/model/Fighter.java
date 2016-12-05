@@ -60,6 +60,23 @@ public class Fighter {
 
 	Game.theCtrl.addFighter(this);
     }
+    public Fighter(double range, double frrt, double power, double projSpeed,
+		   Image projImage, boolean tracks, double health, int team,
+		   ViewObj viewObj, double reward, String musicFileName) {
+	this.range = range;
+	this.frrt = frrt;
+	this.power = power;
+	this.projSpeed = projSpeed;
+	this.projImage = projImage;
+	this.tracks = tracks;
+	this.health = health;
+	this.viewObj = viewObj;
+	this.team = team;
+	this.reward = reward;
+	this.firingNoise = new GameNoise(musicFileName);
+
+	Game.theCtrl.addFighter(this);
+    }
 
     public void update(double duration, ArrayList<Fighter> fighters) {
 	timer -= duration;
@@ -100,9 +117,12 @@ public class Fighter {
     }
 
     public void fire(Fighter target) {
-	if (projImage == null) {
+	if (projImage == null && Math.hypot(
+		viewObj.getX() - target.viewObj.getX(),
+		viewObj.getY() - target.viewObj.getY()) <= range) {
 	    target.takeDamage(power);
 	} else {
+            
 	    firingNoise.play();
 	    Projectile proj = new Projectile(viewObj.getX() + 32 * Math.cos(
 		    viewObj.getDirection() * Math.PI / 180),
@@ -113,7 +133,7 @@ public class Fighter {
 	    proj.setDirection(viewObj.getDirection());
 	}
     }
-
+    
     public void takeDamage(double power) {
 	health -= power;
 	if (health <= 0) {
