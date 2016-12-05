@@ -20,7 +20,7 @@ import java.util.ArrayList;
 import javafx.scene.image.Image;
 
 /**
- *
+ * Projectile class which extends the Mob
  * @author emb038
  */
 public class Projectile extends Mob {
@@ -31,6 +31,16 @@ public class Projectile extends Mob {
     double power;
     double timer;
 
+    /**
+     * Instantiates the Projectile class
+     * @param x
+     * @param y
+     * @param speed
+     * @param power
+     * @param image
+     * @param team
+     * @param tracks
+     */
     public Projectile(double x, double y, double speed, double power,
 		      Image image, int team, boolean tracks) {
 	super(x, y, speed, image);
@@ -44,6 +54,12 @@ public class Projectile extends Mob {
 	Game.theCtrl.addProjectile(this);
     }
 
+    /**
+     * Updates the timer for the Projectile and destroys it if the timer is over
+     * @param duration
+     * @param fighters
+     * @return integer of the times
+     */
     public int update(double duration, ArrayList<Fighter> fighters) {
 	timer -= duration;
 	if (timer <= 0) {
@@ -79,7 +95,9 @@ public class Projectile extends Mob {
 	}
 	return 0;
     }
-
+    /**
+     * Destroy method to remove the projectile
+     */
     void destroy() {
 	Game.theView.removeViewObj(this);
 	Game.theCtrl.removeProjectile(this);

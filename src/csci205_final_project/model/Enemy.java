@@ -30,16 +30,33 @@ public class Enemy extends Mob {
     static double health;
     static double reward;
 
+    /**
+     * Getter for the enemy health
+     *
+     * @return
+     */
     public static double getHealth() {
 	return health;
     }
 
+    /**
+     * Setter for the health of the enemies
+     *
+     * @param health
+     */
     public static void setHealth(int health) {
 	Enemy.health = health;
     }
 
     public Fighter fighter;
 
+    /**
+     * Makes a new fighter for a ViewObj
+     *
+     * @param x x coord of instantiation
+     * @param y y coord of instantiation
+     * @param enemyType the type of enemy
+     */
     public Enemy(double x, double y, EnemyEnum enemyType) {
 	super(x, y, enemyType.speed, enemyType.image);
 	setSpeed(1);
@@ -50,6 +67,11 @@ public class Enemy extends Mob {
 				   this, enemyType.reward);
     }
 
+    /**
+     * Setter for the reward
+     *
+     * @param reward
+     */
     public static void setReward(double reward) {
 	Enemy.reward = reward;
     }

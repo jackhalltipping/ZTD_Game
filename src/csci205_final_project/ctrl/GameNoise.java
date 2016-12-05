@@ -21,6 +21,7 @@ import javafx.scene.media.Media;
 import javafx.scene.media.MediaPlayer;
 
 /**
+ * Class for playing sounds in the game
  *
  * @author Matt
  */
@@ -30,24 +31,23 @@ public class GameNoise {
     //Media sound;
     private static int mediaPlayerCount = 0;
     private static final int MAX_MEDIAPLAYERS = 30;
-    boolean firstPass= true;
+    boolean firstPass = true;
 
-    public GameNoise() {
-	this.musicFileName = "resources/AllIWantForChristmas.mp3";
-	//sound = new Media(new File(musicFileName).toURI().toString());
-    }
-
+    /**
+     * Create a GameNoise based on a file name
+     *
+     * @param musicFileName the file used to generate sound
+     */
     public GameNoise(String musicFileName) {
-        if(musicFileName==null){
-            this.musicFileName=null;
-            return;
-        }
+	if (musicFileName == null) {
+	    this.musicFileName = null;
+	    return;
+	}
 	this.musicFileName = "resources/" + musicFileName;
 	//sound = new Media(new File(this.musicFileName).toURI().toString());
 
-
     }
-    
+
     double startTime;
 
     /**
@@ -55,68 +55,77 @@ public class GameNoise {
      * starting a new sound
      */
     public void play() {
-        if(this.musicFileName==null){
-            return;
-        }
-     
-        if(firstPass){
-            firstPass=false;
-            int startTime = (int)System.nanoTime();
-            soundThread();
-        }
-        
-	if (( (System.nanoTime()) -startTime)>(6*(Math.pow(10, 7))) && mediaPlayerCount < MAX_MEDIAPLAYERS) {
+	if (this.musicFileName == null) {
+	    return;
+	}
 
-            startTime=System.nanoTime();
-            soundThread();
+	if (firstPass) {
+	    firstPass = false;
+	    int startTime = (int) System.nanoTime();
+	    soundThread();
+	}
+
+	if (((System.nanoTime()) - startTime) > (6 * (Math.pow(10, 7))) && mediaPlayerCount < MAX_MEDIAPLAYERS) {
+
+	    startTime = System.nanoTime();
+	    soundThread();
 
 	}
 
     }
-    
-    public void soundThread(){
-    
-       gameNoiseTask theTask = new gameNoiseTask(this.musicFileName);
-       Thread th = new Thread(theTask);
-       th.setDaemon(true);
-       th.start();
-       
+
+    /**
+     * Creates a new task to play the sound
+     */
+    public void soundThread() {
+
+	gameNoiseTask theTask = new gameNoiseTask(this.musicFileName);
+	Thread th = new Thread(theTask);
+	th.setDaemon(true);
+	th.start();
+
     }
-    
-    
-    
-    
-    
-    class gameNoiseTask extends Task{
 
-        private Media sound;
+    /**
+     * A class for threading in GameNoise
+     */
+    class gameNoiseTask extends Task {
 
-        public gameNoiseTask(String musicFileName){
-            
-            	this.sound = new Media(new File(musicFileName).toURI().toString());
+	private Media sound;
 
-        }
-        
-        @Override
-        protected Object call() throws Exception {
-            
-           
-            
-            mediaPlayerCount++;
+	/**
+	 * Create a new task based on the file name
+	 *
+	 * @param musicFileName the file name
+	 */
+	public gameNoiseTask(String musicFileName) {
 
-            MediaPlayer mediaPlayer = new MediaPlayer(sound);
-            mediaPlayer.play();
-            mediaPlayer.setOnEndOfMedia(new Runnable() {
-                        @Override
-                        public void run() {
-                            mediaPlayerCount=0;                        
-                        }
-                    });
-            return sound;
-        }
-        
-        
-        
+	    this.sound = new Media(new File(musicFileName).toURI().toString());
+
+	}
+
+	/**
+	 * Run the task
+	 *
+	 * @return the sound
+	 * @throws Exception problem running the sound
+	 */
+	@Override
+	protected Object call() throws Exception {
+
+	    mediaPlayerCount++;
+
+	    MediaPlayer mediaPlayer = new MediaPlayer(sound);
+	    mediaPlayer.play();
+	    mediaPlayer.setOnEndOfMedia(new Runnable() {
+		@Override
+		public void run() {
+		    mediaPlayerCount = 0;
+		}
+	    });
+	    return sound;
+	}
+
     }
 
 }
