@@ -18,7 +18,7 @@ package csci205_final_project.model;
 import javafx.scene.image.Image;
 
 /**
- *
+ * 
  * @author emb038
  */
 public class Enemy extends Mob {

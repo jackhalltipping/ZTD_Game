@@ -21,7 +21,7 @@ import javafx.scene.layout.BorderPane;
 import javafx.stage.Stage;
 
 /**
- * 
+ * Game main class
  * @author emb038
  */
 public class Game extends Application {
@@ -32,13 +32,18 @@ public class Game extends Application {
     public static ViewStart theViewStart;
     public static ViewGameOver theViewGameOver;
 
+    /**
+     * Starts the game
+     * @param args
+     * @throws IOException
+     */
     public static void main(String[] args) throws IOException {
 	launch(args);
 
     }
     
     /**
-     * 
+     * Initialization of the MVC
      * @throws IOException 
      */
     @Override
@@ -49,7 +54,12 @@ public class Game extends Application {
         theViewGameOver = new ViewGameOver();
 
     }
-
+    
+    /**
+     * Sets up the scene and the primary stage
+     * @param primaryStage
+     * @throws Exception 
+     */
     @Override
     public void start(Stage primaryStage) throws Exception {
         
@@ -67,6 +77,9 @@ public class Game extends Application {
 	// Now, set up the scene, and connect it to the stage!
     }
     
+    /**
+     * sets handler for start button on the ViewStart and switches to the View when the button is clicked
+     */
     public void setHandler() {
 	theViewStart.getRoot().lookup("#start").addEventHandler(
 		MouseEvent.MOUSE_CLICKED,
@@ -93,6 +106,9 @@ public class Game extends Application {
 	});
     }
     
+    /**
+     * changes the scene to game over screen
+     */
     public static void gameOver() {
         Scene sceneStart = new Scene(theViewGameOver.getRoot());
         primaryStage.setTitle("ZTD 47");
