@@ -65,7 +65,6 @@ public class GameNoise {
             soundThread();
         }
         
-        System.out.println(System.nanoTime()-startTime);
 	if (( (System.nanoTime()) -startTime)>(6*(Math.pow(10, 7))) && mediaPlayerCount < MAX_MEDIAPLAYERS) {
 
             startTime=System.nanoTime();
