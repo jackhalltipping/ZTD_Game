@@ -18,7 +18,7 @@ package csci205_final_project.model;
 import javafx.scene.image.Image;
 
 /**
- *
+ * The Tower enumeration class
  * @author Matt
  */
 public enum TowerEnum {
@@ -40,7 +40,21 @@ public enum TowerEnum {
     public boolean tracks;
     public double price;
     public String soundFileName;
-
+    
+    /**
+     * Istantiator of the Tower enumeration with certain properties
+     * @param Name
+     * @param frrt
+     * @param power
+     * @param projSpeed
+     * @param range
+     * @param health
+     * @param tracks
+     * @param image
+     * @param projImage
+     * @param price
+     * @param soundFileName 
+     */
     private TowerEnum(String Name, double frrt,
 		      double power, double projSpeed, double range,
 		      double health,
@@ -60,6 +74,10 @@ public enum TowerEnum {
         this.soundFileName=soundFileName;
     }
 
+    /**
+     * Gets the image of the Enumeration type
+     * @return
+     */
     public Image getImage() {
 	return image;
     }

@@ -18,7 +18,7 @@ package csci205_final_project.model;
 import javafx.scene.image.Image;
 
 /**
- * 
+ * Class which denotes our enemies - zombies
  * @author emb038
  */
 public class Enemy extends Mob {
@@ -32,16 +32,29 @@ public class Enemy extends Mob {
     static double health = 10;
     static double reward;
 
+    /**
+     * Getter for the enemy health
+     * @return
+     */
     public static double getHealth() {
         return health;
     }
 
+    /**
+     * Setter for the health of the enemies
+     * @param health
+     */
     public static void setHealth(int health) {
         Enemy.health = health;
     }
-
+    
     public Fighter fighter;
 
+    /**
+     * Instantiates the enemy
+     * @param x
+     * @param y
+     */
     public Enemy(double x, double y) {
         super(x, y, ENEMY_SPEED, ENEMY_IMAGE);
         setSpeed(1);
@@ -49,6 +62,10 @@ public class Enemy extends Mob {
                                    this, reward);
     }
 
+    /**
+     * Setter for the reward
+     * @param reward
+     */
     public static void setReward(double reward) {
         Enemy.reward = reward;
     }

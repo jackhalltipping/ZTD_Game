@@ -20,7 +20,7 @@ import javafx.scene.image.Image;
 import javafx.scene.layout.Pane;
 
 /**
- *
+ * Player class for the player which extends the Mob class
  * @author emb038
  */
 public class Player extends Mob {
@@ -37,13 +37,22 @@ public class Player extends Mob {
     double moveDirection;
     public PlayerFighter fighter; // #firefighter
 
+    /**
+     * Inatantiation of the Palyer 
+     * @param x
+     * @param y 
+     */
     public Player(double x, double y) {
 	super(x, y, PLAYER_SPEED, PLAYER_IMAGE);
 	fighter = new PlayerFighter(0, frrt, power, projSpeed, projImage,
 				    health, 0,
 				    this);
     }
-
+    
+    /**
+     * Updates the coordinates of the Player
+     * @param duration 
+     */
     public void frame(double duration) {
 	double buffer = 48;//pixels
 
@@ -61,15 +70,27 @@ public class Player extends Mob {
 	setDirection(-dir + 90);
     }
 
+    /**
+     * Sets the direction the Player has to face and move to
+     * @param dir
+     */
     public void setMoveDirection(double dir) {
 	moveDirection = dir;
     }
-
+    
+    /**
+     * Getter of the direction the Player has to face and move to
+     * @return 
+     */
     @Override
     public double getMoveDirection() {
 	return moveDirection; //This is so image points in the right direction
     }
     
+    /**
+     * Getter for the health
+     * @return double value of the health
+     */
     public double getHealth() {
         return this.health;
     }

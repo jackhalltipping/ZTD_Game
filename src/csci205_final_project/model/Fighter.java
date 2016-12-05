@@ -21,7 +21,7 @@ import java.util.ArrayList;
 import javafx.scene.image.Image;
 
 /**
- *
+ * Class to denote every 
  * @author emb038
  */
 public class Fighter {
@@ -60,6 +60,21 @@ public class Fighter {
 
 	Game.theCtrl.addFighter(this);
     }
+
+    /**
+     * Instantiates the Fighter with certain properties
+     * @param range
+     * @param frrt
+     * @param power
+     * @param projSpeed
+     * @param projImage
+     * @param tracks
+     * @param health
+     * @param team
+     * @param viewObj
+     * @param reward
+     * @param musicFileName
+     */
     public Fighter(double range, double frrt, double power, double projSpeed,
 		   Image projImage, boolean tracks, double health, int team,
 		   ViewObj viewObj, double reward, String musicFileName) {
@@ -78,6 +93,11 @@ public class Fighter {
 	Game.theCtrl.addFighter(this);
     }
 
+    /**
+     * Updates the positions of the fighters on our list
+     * @param duration
+     * @param fighters
+     */
     public void update(double duration, ArrayList<Fighter> fighters) {
 	timer -= duration;
 	Fighter target = getTarget(fighters);
@@ -96,6 +116,11 @@ public class Fighter {
 	}
     }
 
+    /**
+     * Method that gets the target of the nearest possible Fighter
+     * @param fighters
+     * @return
+     */
     public Fighter getTarget(ArrayList<Fighter> fighters) {
 	if (viewObj instanceof Enemy) {
 	    return Game.theModel.getPlayer().fighter;
@@ -116,6 +141,10 @@ public class Fighter {
 	return target;
     }
 
+    /**
+     * Fighter fires towards the specified target
+     * @param target
+     */
     public void fire(Fighter target) {
 	if (projImage == null && Math.hypot(
 		viewObj.getX() - target.viewObj.getX(),
@@ -134,6 +163,10 @@ public class Fighter {
 	}
     }
     
+    /**
+     * Fighter takes on the damage, health is decreased
+     * @param power
+     */
     public void takeDamage(double power) {
 	health -= power;
 	if (health <= 0) {
@@ -141,14 +174,15 @@ public class Fighter {
 	}
     }
 
+    /**
+     * Our Player dies and game Over screen is called
+     * 
+     */
     public void die() {
 	Game.theView.removeViewObj(this.viewObj);
 	Game.theCtrl.removeFighter(this);
 	Game.theModel.addMoney(reward);
     }
 
-    public void click() {
-	//Handles clicking of a fighter
-    }
 
 }
