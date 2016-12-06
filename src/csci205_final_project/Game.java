@@ -60,7 +60,7 @@ public class Game extends Application {
     @Override
     public void start(Stage primaryStage) throws Exception {
 
-	GameNoise backgroundMusic = new GameNoise();
+	GameNoise backgroundMusic = new GameNoise("AllIWantForChristmas.mp3");
 	backgroundMusic.play();
 
 	Scene sceneStart = new Scene(theViewStart.getRoot());
