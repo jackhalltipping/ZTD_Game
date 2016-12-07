@@ -19,18 +19,19 @@ import javafx.scene.image.Image;
 
 /**
  * The Tower enumeration class
+ *
  * @author Matt
  */
 public enum TowerEnum {
     MINIGUN("Minigun", 10, 1, 500, 800, 200, false, "minigun.png",
-	    "bullet.png", 20,"regularShot.mp3"),
+	    "bullet.png", 20, "regularShot.mp3"),
     CANNON("Cannon", 1, 20, 250, 1500, 500, false, "cannon.png",
-	   "cannonball.png", 10,"regularShot.mp3"),
+	   "cannonball.png", 10, "regularShot.mp3"),
     MISSLE_LAUNCHER("Missile Launcher", 1, 10, 750, 1200, 200, true,
 		    "launcher.png",
-		    "missile.png", 25,"regularShot.mp3"),
+		    "missile.png", 25, "regularShot.mp3"),
     LASER("Laser", 100, 0.5, 1500, 200, 300, false, "lasergun.png",
-	  "laser.png", 100,null)/*,
+	  "laser.png", 100, null)/*,
     SNIPER("Sniper", 1, 100, 1000, 10000, 100, false, null,
 	   null,15)*/;
     public String Name;
@@ -40,9 +41,10 @@ public enum TowerEnum {
     public boolean tracks;
     public double price;
     public String soundFileName;
-    
+
     /**
      * Istantiator of the Tower enumeration with certain properties
+     *
      * @param Name
      * @param frrt
      * @param power
@@ -53,14 +55,14 @@ public enum TowerEnum {
      * @param image
      * @param projImage
      * @param price
-     * @param soundFileName 
+     * @param soundFileName
      */
     private TowerEnum(String Name, double frrt,
 		      double power, double projSpeed, double range,
 		      double health,
 		      boolean tracks, String image, String projImage,
 		      double price, String soundFileName) {
-	String path = "file:src/csci205_final_project/view/images/";
+	String path = "file:resources/images/";
 	this.Name = Name;
 	this.image = new Image(path + image);
 	this.projImage = new Image(path + projImage);
@@ -71,11 +73,12 @@ public enum TowerEnum {
 	this.health = health;
 	this.tracks = tracks;
 	this.price = price;
-        this.soundFileName=soundFileName;
+	this.soundFileName = soundFileName;
     }
 
     /**
      * Gets the image of the Enumeration type
+     *
      * @return
      */
     public Image getImage() {

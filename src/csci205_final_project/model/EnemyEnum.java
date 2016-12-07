@@ -42,7 +42,7 @@ public enum EnemyEnum {
     private EnemyEnum(String name, String image, String projImage,
 		      double projSpeed, double speed, double range,
 		      double frrt, double power, double health, double reward) {
-	String path = "file:src/csci205_final_project/view/images/";
+	String path = "file:resources/images/";
 	this.Name = name;
 	this.image = new Image(path + image);
 	this.projImage = new Image(path + projImage);

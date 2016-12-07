@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+
+<VBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8.0.92" xmlns:fx="http://javafx.com/fxml/1">
+   <children>
+      <Pane id="startPane" prefHeight="400.0" prefWidth="397.0">
+         <children>
+            <Label layoutX="14.0" layoutY="315.0" prefHeight="71.0" prefWidth="313.0" text="Are You Ready?">
+               <font>
+                  <Font name="System Bold" size="35.0" />
+               </font>
+            </Label>
+            <Button id="start" layoutX="327.0" layoutY="316.0" mnemonicParsing="false" prefHeight="45.0" prefWidth="254.0" text="Start!">
+               <font>
+                  <Font size="32.0" />
+               </font></Button>
+            <Label layoutX="14.0" layoutY="14.0" prefHeight="297.0" prefWidth="567.0" text="The date is December 25, 2047.  WWIII has just concluded and nuclear arms have devastated the Earth.  Mutations have begun to appear in all forms of life.  Even though much of the world is wasteland, there was a clear victor in the war... the side you fought for.  This was largely due to your army's use of technology; combatants were taught how to construct many self-targeting weapons.  Your army's use of technological power runs even deeper than this, however.  After the victory, you were informed that you were the only human in your squadron.  Your country won WWIII with robot.  These robot soldiers were loaded with general AI software after the war, to be more dynamic in the reconstruction of society.  The newly sentient machines saw the nuclear wasteland humans had created, and saw humans as a threat to everything around them.  Thus, all robot soldiers, including your previous brothers in arms, find it necessary to destroy all humans.  You don't know who to trust.  All you know is that you want to survive.  Unfortunately, nuclear zombies and robot soldiers are on the hunt, and all thay want for Christmas, is you." wrapText="true" />
+         </children>
+      </Pane>
+   </children>
+</VBox>
