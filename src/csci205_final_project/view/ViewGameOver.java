@@ -26,53 +26,60 @@ import javafx.scene.layout.VBox;
 
 /**
  * Class which represents the view of the game over screen
+ *
  * @author xt004
  */
 public class ViewGameOver {
     Scene scene;
     VBox root;
-    
+
     /**
      * Constructor which sets the root for the game over screen
+     *
      * @throws IOException
      */
     public ViewGameOver() throws IOException {
 	setRoot();
     }
+
     /**
      * Uploads the fxml file for the view of the root
+     *
      * @throws MalformedURLException
-     * @throws IOException 
+     * @throws IOException
      */
     private void setRoot() throws MalformedURLException, IOException {
 
-	File file = new File("src/csci205_final_project/view/gameOver.fxml");
+	File file = new File("resources/gameOver.fxml");
 	URL url = file.toURL();
 	System.out.println(url);
 	root = FXMLLoader.load(url);
     }
-    
+
     /**
      * getter for the root
+     *
      * @return Parent our root
      */
     public Parent getRoot() {
-        return root;
+	return root;
     }
-    
+
     /**
      * getter for the scene
-     * @return Scene 
+     *
+     * @return Scene
      */
     public Scene getScene() {
-        return scene;
+	return scene;
     }
 
     /**
      * setter for the scene
+     *
      * @param scene
      */
     public void setScene(Scene scene) {
-        this.scene = scene;
+	this.scene = scene;
     }
 }

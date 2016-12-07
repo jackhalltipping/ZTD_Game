@@ -21,16 +21,17 @@ import javafx.scene.layout.Pane;
 
 /**
  * Player class for the player which extends the Mob class
+ *
  * @author emb038
  */
 public class Player extends Mob {
     private static Image PLAYER_IMAGE = new Image(
-	    "file:src/csci205_final_project/view/images/player.png");
+	    "file:resources/images/player.png");
     private static double PLAYER_SPEED = 350;
     double frrt = 2;
     double power = 1;
     Image projImage = new Image(
-	    "file:src/csci205_final_project/view/images/bullet.png");
+	    "file:resources/images/bullet.png");
     double projSpeed = 750;
     double health = 100;
 
@@ -38,9 +39,10 @@ public class Player extends Mob {
     public PlayerFighter fighter; // #firefighter
 
     /**
-     * Inatantiation of the Palyer 
+     * Inatantiation of the Palyer
+     *
      * @param x
-     * @param y 
+     * @param y
      */
     public Player(double x, double y) {
 	super(x, y, PLAYER_SPEED, PLAYER_IMAGE);
@@ -48,10 +50,11 @@ public class Player extends Mob {
 				    health, 0,
 				    this);
     }
-    
+
     /**
      * Updates the coordinates of the Player
-     * @param duration 
+     *
+     * @param duration
      */
     public void frame(double duration) {
 	double buffer = 48;//pixels
@@ -72,26 +75,29 @@ public class Player extends Mob {
 
     /**
      * Sets the direction the Player has to face and move to
+     *
      * @param dir
      */
     public void setMoveDirection(double dir) {
 	moveDirection = dir;
     }
-    
+
     /**
      * Getter of the direction the Player has to face and move to
-     * @return 
+     *
+     * @return
      */
     @Override
     public double getMoveDirection() {
 	return moveDirection; //This is so image points in the right direction
     }
-    
+
     /**
      * Getter for the health
+     *
      * @return double value of the health
      */
     public double getHealth() {
-        return this.health;
+	return this.health;
     }
 }

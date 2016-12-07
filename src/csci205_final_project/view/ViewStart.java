@@ -22,7 +22,6 @@ import java.net.URL;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import static javafx.scene.input.DataFormat.URL;
 import javafx.scene.layout.VBox;
 
 /**
@@ -32,49 +31,54 @@ import javafx.scene.layout.VBox;
 public class ViewStart {
     Scene scene;
     VBox root;
-    
+
     /**
      * Constructor which sets the root for the start screen
+     *
      * @throws IOException
      */
     public ViewStart() throws IOException {
 	setRoot();
     }
-    
+
     /**
      * Sets the root by uploading file from the fxml file
+     *
      * @throws MalformedURLException
-     * @throws IOException 
+     * @throws IOException
      */
     private void setRoot() throws MalformedURLException, IOException {
 
-	File file = new File("src/csci205_final_project/view/startPane.fxml");
+	File file = new File("resources/startPane.fxml");
 	URL url = file.toURL();
 	System.out.println(url);
 	root = FXMLLoader.load(url);
     }
-    
+
     /**
      * getter for our root
+     *
      * @return Parent our root
      */
     public Parent getRoot() {
-        return root;
+	return root;
     }
-    
+
     /**
      * getter for the scene
-     * @return screen 
+     *
+     * @return screen
      */
     public Scene getScene() {
-        return scene;
+	return scene;
     }
 
     /**
      * setter for the scene
+     *
      * @param scene
      */
     public void setScene(Scene scene) {
-        this.scene = scene;
+	this.scene = scene;
     }
 }

@@ -44,6 +44,8 @@ public class Game extends Application {
      */
     @Override
     public void init() throws IOException {
+	System.out.println(
+		this.getClass().getClassLoader().getResource("").getPath());
 	theModel = new Model();
 	theView = new View(theModel);
 	theViewStart = new ViewStart();
