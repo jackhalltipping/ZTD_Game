@@ -35,6 +35,8 @@ import javafx.stage.Stage;
  * @author emb038
  */
 public class TestFXGame {
+    
+    public static boolean firstPassTesting=true;
 
     /**
      * Starts the game

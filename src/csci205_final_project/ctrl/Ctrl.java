@@ -16,6 +16,8 @@ import csci205_final_project.view.ViewStart;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Random;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javafx.animation.PauseTransition;
 import javafx.event.ActionEvent;
 import javafx.event.Event;
@@ -55,6 +57,7 @@ public class Ctrl {
     Random random = new Random();
 
     View theView;
+    int curWave=0;
     Model theModel;
     static boolean inWave;
     double DT = 0.02; //Frame duration in seconds
@@ -83,9 +86,7 @@ public class Ctrl {
         return running;
     }
 
-    public static void setRunning(boolean running) {
-        Ctrl.running = running;
-    }
+    
 
     
     
@@ -199,14 +200,53 @@ public class Ctrl {
 	    if (Ctrl.running) {
 		this.frame();
 	    }
+            if(Game.testing){
+                testFrame(e);
+            }
             
-            MouseEvent towerPress = new MouseEvent(MouseEvent.MOUSE_PRESSED, 200, 200, DT, DT, MouseButton.PRIMARY, 1, false, false, false, false, false, false, false, false, false, true, new PickResult(theView.getGameRoot(), 0, 0));
-            Event.fireEvent( ((HBox)theView.getMenuRoot().lookup("#towerButtons")).getChildren().get(0), e);
-            Event.fireEvent(theView.getGameRoot(),  towerPress);   
-                
+            wait.playFromStart();
 
 	});
 	wait.play();
+    }
+
+    private void testFrame(ActionEvent e) {
+        if(TestFXGame.firstPassTesting){
+            TestFXGame.firstPassTesting=false;
+            //place tower
+            MouseEvent towerPress0 = new MouseEvent(MouseEvent.MOUSE_PRESSED, 200, 200, DT, DT, MouseButton.PRIMARY, 1, false, false, false, false, false, false, false, false, false, true, new PickResult(theView.getGameRoot(), 0, 0));
+            MouseEvent towerPress1 = new MouseEvent(MouseEvent.MOUSE_PRESSED, 200, 300, DT, DT, MouseButton.PRIMARY, 1, false, false, false, false, false, false, false, false, false, true, new PickResult(theView.getGameRoot(), 0, 0));
+            
+            //select minigun and palce
+            Event.fireEvent( ((HBox)theView.getMenuRoot().lookup("#towerButtons")).getChildren().get(0), e);
+            Event.fireEvent(theView.getGameRoot(),  towerPress0);
+            
+            //select missile and place
+            Event.fireEvent( ((HBox)theView.getMenuRoot().lookup("#towerButtons")).getChildren().get(2), e);
+            Event.fireEvent(theView.getGameRoot(),  towerPress1);
+            
+            MouseEvent shoot = new MouseEvent(MouseEvent.MOUSE_PRESSED, 200, 200, DT, DT, MouseButton.PRIMARY, 1, false, false, false, false, false, false, false, false, false, true, new PickResult(theView.getGameRoot(), 0, 0));
+            MouseEvent move = new MouseEvent(MouseEvent.MOUSE_MOVED, 200, 200, DT, DT, MouseButton.PRIMARY, 1, false, false, false, false, false, false, false, false, false, true, new PickResult(theView.getGameRoot(), 0, 0));
+            Event.fireEvent(theView.getGameRoot(), move);
+            Event.fireEvent(theView.getGameRoot(),  shoot);
+            
+            //start
+            ((Button)Game.theView.getMenuRoot().lookup("#startWave")).fire();
+            
+            KeyEvent aKey = new KeyEvent(KeyEvent.KEY_PRESSED, "", "", KeyCode.A, false, false, false, false);
+            KeyEvent.fireEvent(theView.getGameRoot(), aKey);
+        }
+        if(theModel.getMoney()>100){
+            //select laser and place
+            MouseEvent towerPress2 = new MouseEvent(MouseEvent.MOUSE_PRESSED, 400, 300, DT, DT, MouseButton.PRIMARY, 1, false, false, false, false, false, false, false, false, false, true, new PickResult(theView.getGameRoot(), 0, 0));
+            Event.fireEvent( ((HBox)theView.getMenuRoot().lookup("#towerButtons")).getChildren().get(3), e);
+            Event.fireEvent(theView.getGameRoot(),  towerPress2);
+        }
+        if(curWave<theModel.getWave()){
+            //start next wave
+            ((Button)Game.theView.getMenuRoot().lookup("#startWave")).fire();
+            curWave++;
+        }
     }
 
     /**

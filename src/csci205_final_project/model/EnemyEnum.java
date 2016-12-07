@@ -23,7 +23,7 @@ import javafx.scene.image.Image;
  */
 public enum EnemyEnum {
     ZOMBIE("Zombie", "zombie.png", null, 0, 250, 32, 3, 1, 10, 2),
-    GUNNER("Gunner", "gunner.png", "bullet.png", 456, 100, 256, 1, 15, 50, 5),
+    GUNNER("Gunner", "gunner.png", "bullet.png", 456, 100, 256, 0.333333333333, 10, 50, 5),
     BUG("Bug", "bug.png", null, 0, 1000, 32, 10, 1, 5, 10);
 
     public static double lowestReward = 2;
