@@ -10,8 +10,11 @@ import java.io.IOException;
 import javafx.application.Application;
 import javafx.event.EventHandler;
 import javafx.scene.Scene;
+import javafx.scene.input.MouseButton;
 import javafx.scene.input.MouseEvent;
+import javafx.scene.input.PickResult;
 import javafx.stage.Stage;
+import sun.management.snmp.jvminstr.JvmThreadInstanceEntryImpl;
 
 /**
  * Game main class
@@ -25,6 +28,8 @@ public class Game extends Application {
     public static Stage primaryStage;
     public static ViewStart theViewStart;
     public static ViewGameOver theViewGameOver;
+    public static boolean testing=false;
+    public static String testType;
 
     /**
      * Starts the game
@@ -35,6 +40,13 @@ public class Game extends Application {
     public static void main(String[] args) throws IOException {
 	launch(args);
 
+    }
+    public static void test() throws IOException{
+        String args[] = {"test"};
+        testing=true;
+        main(args);
+       
+        
     }
 
     /**
@@ -73,6 +85,10 @@ public class Game extends Application {
 	primaryStage.show();
 
 	setHandler();
+        if(Game.testing){
+            MouseEvent startClick = new MouseEvent(MouseEvent.MOUSE_CLICKED, 4, 4, 0.01, 0.01, MouseButton.PRIMARY, 1, false, false, false, false, false, false, false, false, false, true, new PickResult(Game.theViewStart.getRoot().lookup("#start"), 0, 0));
+            MouseEvent.fireEvent(Game.theViewStart.getRoot().lookup("#start"), startClick);
+        }
 
 	// Now, set up the scene, and connect it to the stage!
     }

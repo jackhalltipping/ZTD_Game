@@ -1,5 +1,7 @@
 package csci205_final_project.ctrl;
 
+import csci205_final_project.Game;
+import static csci205_final_project.Game.theViewStart;
 import csci205_final_project.model.Enemy;
 import csci205_final_project.model.EnemyEnum;
 import csci205_final_project.model.Fighter;
@@ -8,17 +10,23 @@ import csci205_final_project.model.Projectile;
 import csci205_final_project.model.Tower;
 import csci205_final_project.model.TowerEnum;
 import csci205_final_project.model.ViewObj;
+import csci205_final_project.test.TestFXGame;
 import csci205_final_project.view.View;
+import csci205_final_project.view.ViewStart;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Random;
 import javafx.animation.PauseTransition;
 import javafx.event.ActionEvent;
+import javafx.event.Event;
 import javafx.event.EventHandler;
 import javafx.scene.control.Button;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
+import javafx.scene.input.MouseButton;
 import javafx.scene.input.MouseEvent;
+import javafx.scene.input.PickResult;
+import javafx.scene.layout.HBox;
 import javafx.scene.layout.Pane;
 import javafx.util.Duration;
 
@@ -71,6 +79,16 @@ public class Ctrl {
 	setWaveButtonAction();
     }
 
+    public static boolean isRunning() {
+        return running;
+    }
+
+    public static void setRunning(boolean running) {
+        Ctrl.running = running;
+    }
+
+    
+    
     /**
      * Setter for the keys
      */
@@ -181,7 +199,12 @@ public class Ctrl {
 	    if (Ctrl.running) {
 		this.frame();
 	    }
-	    wait.playFromStart();
+            
+            MouseEvent towerPress = new MouseEvent(MouseEvent.MOUSE_PRESSED, 200, 200, DT, DT, MouseButton.PRIMARY, 1, false, false, false, false, false, false, false, false, false, true, new PickResult(theView.getGameRoot(), 0, 0));
+            Event.fireEvent( ((HBox)theView.getMenuRoot().lookup("#towerButtons")).getChildren().get(0), e);
+            Event.fireEvent(theView.getGameRoot(),  towerPress);   
+                
+
 	});
 	wait.play();
     }

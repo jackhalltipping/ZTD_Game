@@ -43,6 +43,40 @@ public class Fighter {
 
     double reward;
 
+    public double getFrrt() {
+        return frrt;
+    }
+
+    public void setFrrt(double frrt) {
+        this.frrt = frrt;
+    }
+
+    public double getPower() {
+        return power;
+    }
+
+    public void setPower(double power) {
+        this.power = power;
+    }
+
+    public double getHealth() {
+        return health;
+    }
+
+    public void setHealth(double health) {
+        this.health = health;
+    }
+
+    public double getReward() {
+        return reward;
+    }
+
+    public void setReward(double reward) {
+        this.reward = reward;
+    }
+
+    
+    
     public Fighter(double range, double frrt, double power, double projSpeed,
 		   Image projImage, boolean tracks, double health, int team,
 		   ViewObj viewObj, double reward) {
